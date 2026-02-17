@@ -15,6 +15,7 @@ function DashboardContent() {
   const [courses, setCourses] = useState([]);
   const [universities, setUniversities] = useState([]);
   const [services, setServices] = useState([]);
+  const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,20 +24,32 @@ function DashboardContent() {
 
   const fetchUserData = async () => {
     try {
-      const [enrollmentsRes, inquiriesRes, partnershipsRes, coursesRes, universitiesRes, servicesRes] = await Promise.all([
+      const requests = [
         api.get('/enrollments'),
         api.get('/inquiries'),
         api.get('/partnerships'),
         api.get('/courses'),
         api.get('/universities'),
         api.get('/services')
-      ]);
-      setEnrollments(enrollmentsRes.data);
-      setInquiries(inquiriesRes.data);
-      setPartnerships(partnershipsRes.data);
-      setCourses(coursesRes.data);
-      setUniversities(universitiesRes.data);
-      setServices(servicesRes.data);
+      ];
+
+      // Only fetch subscribers if user is admin
+      if (user?.role === 'admin') {
+        requests.push(api.get('/newsletter'));
+      }
+
+      const responses = await Promise.all(requests);
+      
+      setEnrollments(responses[0].data);
+      setInquiries(responses[1].data);
+      setPartnerships(responses[2].data);
+      setCourses(responses[3].data);
+      setUniversities(responses[4].data);
+      setServices(responses[5].data);
+      
+      if (user?.role === 'admin' && responses[6]) {
+        setSubscribers(responses[6].data.subscribers || []);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -115,21 +128,21 @@ function DashboardContent() {
       {/* Header with User Profile */}
       <div className="mb-8 flex items-start justify-between">
         <div>
-          <h1 className="text-4xl font-bold mb-2 gradient-text">
+          <h1 className="text-4xl font-bold mb-2 gradient-text-emerald">
             Welcome back, {user?.name}
           </h1>
-          <p className="text-gray-600 text-lg">Here&apos;s your personalized B2B dashboard overview</p>
+          <p className="text-gray-300 text-lg">Here&apos;s your personalized B2B dashboard overview</p>
         </div>
-        <div className="rounded-xl bg-white border border-gray-200 shadow-soft p-4">
+        <div className="rounded-xl glass-dark border border-emerald-500/30 shadow-emerald-glow p-4">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary-700 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+            <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center text-gray-900 font-bold text-xl">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p className="text-gray-900 font-semibold">{user?.name}</p>
-              <p className="text-xs text-gray-600 capitalize">{user?.role} Account</p>
+              <p className="text-white font-semibold">{user?.name}</p>
+              <p className="text-xs text-gray-400 capitalize">{user?.role} Account</p>
               {user?.companyName && (
-                <p className="text-xs text-primary-700">{user.companyName}</p>
+                <p className="text-xs text-emerald-400">{user.companyName}</p>
               )}
             </div>
           </div>
@@ -138,18 +151,18 @@ function DashboardContent() {
 
       {/* Notifications Section */}
       {notifications.length > 0 && (
-        <div className="mb-8 rounded-xl bg-gradient-to-r from-primary-50 to-accent-50 border border-primary-200 p-4">
+        <div className="mb-8 rounded-xl bg-gradient-to-r from-emerald-500/10 to-green-500/10 border border-emerald-500/30 p-4">
           <div className="flex items-center space-x-2 mb-3">
-            <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
-            <h3 className="text-gray-900 font-semibold">Recent Updates</h3>
+            <h3 className="text-white font-semibold">Recent Updates</h3>
           </div>
           <div className="space-y-2">
             {notifications.map((notif, index) => (
               <div key={index} className="flex items-center justify-between text-sm">
-                <p className="text-gray-700">{notif.message}</p>
-                <span className="text-xs text-gray-500">{notif.time}</span>
+                <p className="text-gray-300">{notif.message}</p>
+                <span className="text-xs text-gray-400">{notif.time}</span>
               </div>
             ))}
           </div>
@@ -159,17 +172,17 @@ function DashboardContent() {
       {/* Stats Grid */}
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         {stats.map((stat, index) => (
-          <div key={index} className="relative overflow-hidden rounded-xl bg-white border border-gray-200 shadow-soft p-6 hover:shadow-medium transition-all group">
+          <div key={index} className="relative overflow-hidden rounded-xl glass-dark border border-emerald-500/20 shadow-emerald-glow p-6 hover:shadow-emerald-glow-lg transition-all group">
             <div className="flex items-start justify-between mb-4">
-              <div className={`p-3 rounded-lg ${stat.bgColor}`}>
-                <div className={stat.textColor}>{stat.icon}</div>
+              <div className={`p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30`}>
+                <div className="text-emerald-400">{stat.icon}</div>
               </div>
               <div className="text-right">
-                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                <p className="text-sm text-gray-500">of {stat.total} total</p>
+                <p className="text-3xl font-bold text-white">{stat.value}</p>
+                <p className="text-sm text-gray-400">of {stat.total} total</p>
               </div>
             </div>
-            <h3 className="text-gray-700 font-semibold">{stat.title}</h3>
+            <h3 className="text-gray-300 font-semibold">{stat.title}</h3>
             <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity`}></div>
           </div>
         ))}
@@ -178,26 +191,26 @@ function DashboardContent() {
       {/* Partnership Status & Inquiry Tracking */}
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         {/* Partnership Status */}
-        <div className="rounded-xl bg-white border border-gray-200 shadow-soft p-6">
+        <div className="rounded-xl glass-dark border border-emerald-500/20 shadow-emerald-glow p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
-              <svg className="w-5 h-5 mr-2 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <h2 className="text-xl font-bold text-white flex items-center">
+              <svg className="w-5 h-5 mr-2 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               Partnership Status
             </h2>
-            <Link href="/dashboard/partnership" className="text-primary-700 hover:text-primary-800 text-sm font-semibold transition-colors">
+            <Link href="/dashboard/partnership" className="text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors">
               Apply →
             </Link>
           </div>
           {partnerships.length === 0 ? (
             <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
+                <svg className="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <p className="text-gray-600 mb-4">No partnerships yet</p>
+              <p className="text-gray-300 mb-4">No partnerships yet</p>
               <Link href="/dashboard/partnership" className="btn-primary inline-block text-sm">
                 Apply for Partnership
               </Link>
@@ -205,15 +218,15 @@ function DashboardContent() {
           ) : (
             <div className="space-y-3 max-h-64 overflow-y-auto">
               {partnerships.map((partnership) => (
-                <div key={partnership._id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary-300 transition-colors">
+                <div key={partnership._id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-emerald-500/20 hover:border-emerald-500/40 transition-colors">
                   <div>
-                    <h3 className="font-semibold text-gray-900 text-sm">{partnership.companyName}</h3>
-                    <p className="text-xs text-gray-600">{partnership.partnershipType}</p>
+                    <h3 className="font-semibold text-white text-sm">{partnership.companyName}</h3>
+                    <p className="text-xs text-gray-400">{partnership.partnershipType}</p>
                   </div>
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                    partnership.status === 'approved' ? 'bg-green-100 text-green-700' :
-                    partnership.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                    'bg-yellow-100 text-yellow-700'
+                    partnership.status === 'approved' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+                    partnership.status === 'rejected' ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
+                    'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
                   }`}>
                     {partnership.status}
                   </span>
@@ -224,26 +237,26 @@ function DashboardContent() {
         </div>
 
         {/* Inquiry Tracking */}
-        <div className="rounded-xl bg-white border border-gray-200 shadow-soft p-6">
+        <div className="rounded-xl glass-dark border border-emerald-500/20 shadow-emerald-glow p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
-              <svg className="w-5 h-5 mr-2 text-accent-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <h2 className="text-xl font-bold text-white flex items-center">
+              <svg className="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
               </svg>
               Inquiry Tracking
             </h2>
-            <Link href="/dashboard/inquiry" className="text-primary-700 hover:text-primary-800 text-sm font-semibold transition-colors">
+            <Link href="/dashboard/inquiry" className="text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors">
               Submit →
             </Link>
           </div>
           {inquiries.length === 0 ? (
             <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+                <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
               </div>
-              <p className="text-gray-600 mb-4">No inquiries yet</p>
+              <p className="text-gray-300 mb-4">No inquiries yet</p>
               <Link href="/dashboard/inquiry" className="btn-primary inline-block text-sm">
                 Submit Inquiry
               </Link>
@@ -251,18 +264,18 @@ function DashboardContent() {
           ) : (
             <div className="space-y-3 max-h-64 overflow-y-auto">
               {inquiries.map((inquiry) => (
-                <div key={inquiry._id} className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-accent-300 transition-colors">
+                <div key={inquiry._id} className="p-4 bg-gray-800/50 rounded-lg border border-emerald-500/20 hover:border-green-500/40 transition-colors">
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-gray-900 text-sm font-medium">{inquiry.subject}</span>
+                    <span className="text-white text-sm font-medium">{inquiry.subject}</span>
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      inquiry.status === 'resolved' ? 'bg-green-100 text-green-700' :
-                      inquiry.status === 'in-progress' ? 'bg-blue-100 text-blue-700' :
-                      'bg-yellow-100 text-yellow-700'
+                      inquiry.status === 'resolved' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+                      inquiry.status === 'in-progress' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
+                      'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
                     }`}>
                       {inquiry.status}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-600">{new Date(inquiry.createdAt).toLocaleDateString()}</p>
+                  <p className="text-xs text-gray-400">{new Date(inquiry.createdAt).toLocaleDateString()}</p>
                 </div>
               ))}
             </div>
@@ -270,9 +283,78 @@ function DashboardContent() {
         </div>
       </div>
 
+      {/* Newsletter Subscribers Section - Admin Only */}
+      {user?.role === 'admin' && (
+        <div className="mb-8">
+          <div className="rounded-xl glass-dark border border-emerald-500/20 shadow-emerald-glow p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-white flex items-center">
+                <svg className="w-5 h-5 mr-2 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Newsletter Subscribers
+              </h2>
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-semibold border border-emerald-500/30">
+                  {subscribers.filter(s => s.isActive).length} Active
+                </span>
+                <span className="text-gray-400 text-sm">
+                  {subscribers.length} Total
+                </span>
+              </div>
+            </div>
+            {subscribers.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
+                  <svg className="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <p className="text-gray-300 mb-2">No subscribers yet</p>
+                <p className="text-sm text-gray-400">Subscribers will appear here when users sign up for the newsletter</p>
+              </div>
+            ) : (
+              <div className="space-y-2 max-h-80 overflow-y-auto">
+                {subscribers.slice(0, 10).map((subscriber) => (
+                  <div key={subscriber._id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-emerald-500/20 hover:border-emerald-500/40 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center border border-emerald-500/30">
+                        <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-white font-medium text-sm">{subscriber.email}</p>
+                        <p className="text-xs text-gray-400">
+                          Subscribed: {new Date(subscriber.subscribedAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                      subscriber.isActive 
+                        ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                        : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+                    }`}>
+                      {subscriber.isActive ? 'Active' : 'Inactive'}
+                    </span>
+                  </div>
+                ))}
+                {subscribers.length > 10 && (
+                  <div className="text-center pt-4">
+                    <Link href="/admin/subscribers" className="text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors">
+                      View All {subscribers.length} Subscribers →
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Recommended Partnerships & Tailored Recommendations */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Recommended for Your Institution</h2>
+        <h2 className="text-2xl font-bold text-white mb-6">Recommended for Your Institution</h2>
         <div className="grid md:grid-cols-3 gap-6">
           <Link href="/courses" className="group rounded-xl bg-white border border-gray-200 shadow-soft p-6 hover:shadow-medium hover:border-primary-300 transition-all flex flex-col h-full">
             <div className="flex items-center space-x-4 flex-grow">

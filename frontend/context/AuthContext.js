@@ -33,7 +33,9 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
+      console.log('Attempting registration with:', { ...userData, password: '***' });
       const { data } = await api.post('/auth/register', userData);
+      console.log('Registration successful:', data);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data));
       setUser(data);
@@ -41,14 +43,19 @@ export const AuthProvider = ({ children }) => {
       router.push('/dashboard');
       return data;
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Registration failed');
+      console.error('Registration error:', error);
+      console.error('Error response:', error.response?.data);
+      const errorMessage = error.response?.data?.message || error.message || 'Registration failed';
+      toast.error(errorMessage);
       throw error;
     }
   };
 
   const login = async (credentials) => {
     try {
+      console.log('Attempting login with:', { ...credentials, password: '***' });
       const { data } = await api.post('/auth/login', credentials);
+      console.log('Login successful:', data);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data));
       setUser(data);
@@ -56,7 +63,10 @@ export const AuthProvider = ({ children }) => {
       router.push('/dashboard');
       return data;
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Login failed');
+      console.error('Login error:', error);
+      console.error('Error response:', error.response?.data);
+      const errorMessage = error.response?.data?.message || error.message || 'Login failed';
+      toast.error(errorMessage);
       throw error;
     }
   };

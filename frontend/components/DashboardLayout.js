@@ -158,27 +158,30 @@ export default function DashboardLayout({ children }) {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black">
       {/* Sidebar */}
-      <aside className={`${sidebarOpen ? 'w-72' : 'w-20'} bg-white border-r border-gray-200 transition-all duration-300 flex flex-col shadow-soft`}>
+      <aside className={`${sidebarOpen ? 'w-72' : 'w-20'} bg-black border-r border-emerald-500/20 transition-all duration-300 flex flex-col shadow-emerald-glow relative overflow-hidden`}>
+        {/* Background Effects */}
+        <div className="absolute inset-0 tech-grid opacity-5"></div>
+        <div className="absolute top-0 left-0 w-48 h-48 bg-emerald-500/5 rounded-full filter blur-3xl"></div>
         {/* Logo */}
-        <div className="p-4 border-b border-gray-200">
+        <div className="p-4 border-b border-emerald-500/20 relative z-10">
           <Link href="/" className="flex items-center">
             {sidebarOpen ? (
               <div className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-700 to-primary-600 rounded-lg flex items-center justify-center shadow-soft">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-green-500 rounded-lg flex items-center justify-center shadow-emerald-glow">
+                  <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                   </svg>
                 </div>
-                <span className="text-lg font-bold gradient-text">
+                <span className="text-lg font-bold gradient-text-emerald">
                   GEC Portal
                 </span>
               </div>
             ) : (
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-700 to-primary-600 rounded-lg flex items-center justify-center mx-auto shadow-soft">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-green-500 rounded-lg flex items-center justify-center mx-auto shadow-emerald-glow">
+                <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
                 </svg>
               </div>
@@ -187,22 +190,22 @@ export default function DashboardLayout({ children }) {
         </div>
 
         {/* User Info */}
-        <div className="p-4 border-b border-gray-200">
+        <div className="p-4 border-b border-emerald-500/20 relative z-10">
           <div className="flex items-center">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-100 to-accent-100 rounded-full flex items-center justify-center text-primary-700 font-bold border-2 border-primary-200">
+            <div className="w-10 h-10 bg-gradient-to-br from-emerald-400/20 to-green-500/20 rounded-full flex items-center justify-center text-emerald-400 font-bold border-2 border-emerald-500/30">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             {sidebarOpen && (
               <div className="ml-3 flex-1">
-                <p className="text-gray-900 font-semibold text-sm truncate">{user?.name}</p>
-                <p className="text-gray-600 text-xs capitalize">{user?.role}</p>
+                <p className="text-white font-semibold text-sm truncate">{user?.name}</p>
+                <p className="text-gray-400 text-xs capitalize">{user?.role}</p>
               </div>
             )}
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-4 px-2">
+        <nav className="flex-1 overflow-y-auto py-4 px-2 relative z-10">
           {/* Main Menu */}
           {sidebarOpen && <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Main Menu</div>}
           {userMenuItems.map((item) => {
@@ -213,8 +216,8 @@ export default function DashboardLayout({ children }) {
                 href={item.path}
                 className={`flex items-center px-3 py-3 mb-1 rounded-lg transition-all ${
                   isActive
-                    ? 'bg-primary-50 text-primary-700 border-l-4 border-primary-700'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    ? 'bg-emerald-500/20 text-emerald-400 border-l-4 border-emerald-500 shadow-emerald-glow'
+                    : 'text-gray-400 hover:bg-gray-800/50 hover:text-emerald-400'
                 }`}
               >
                 <span className={sidebarOpen ? '' : 'mx-auto'}>{item.icon}</span>
@@ -233,8 +236,8 @@ export default function DashboardLayout({ children }) {
                 href={item.path}
                 className={`flex items-center px-3 py-3 mb-1 rounded-lg transition-all ${
                   isActive
-                    ? 'bg-primary-50 text-primary-700 border-l-4 border-primary-700'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    ? 'bg-emerald-500/20 text-emerald-400 border-l-4 border-emerald-500 shadow-emerald-glow'
+                    : 'text-gray-400 hover:bg-gray-800/50 hover:text-emerald-400'
                 }`}
               >
                 <span className={sidebarOpen ? '' : 'mx-auto'}>{item.icon}</span>
@@ -246,7 +249,7 @@ export default function DashboardLayout({ children }) {
           {/* Admin Section */}
           {isAdmin && (
             <>
-              {sidebarOpen && <div className="px-3 mt-6 mb-2 text-xs font-semibold text-accent-700 uppercase tracking-wider">Administration</div>}
+              {sidebarOpen && <div className="px-3 mt-6 mb-2 text-xs font-semibold text-green-400 uppercase tracking-wider">Administration</div>}
               {adminMenuItems.map((item) => {
                 const isActive = pathname === item.path;
                 return (
@@ -255,8 +258,8 @@ export default function DashboardLayout({ children }) {
                     href={item.path}
                     className={`flex items-center px-3 py-3 mb-1 rounded-lg transition-all ${
                       isActive
-                        ? 'bg-accent-50 text-accent-700 border-l-4 border-accent-700'
-                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                        ? 'bg-green-500/20 text-green-400 border-l-4 border-green-500 shadow-emerald-glow'
+                        : 'text-gray-400 hover:bg-gray-800/50 hover:text-green-400'
                     }`}
                   >
                     <span className={sidebarOpen ? '' : 'mx-auto'}>{item.icon}</span>
@@ -269,10 +272,10 @@ export default function DashboardLayout({ children }) {
         </nav>
 
         {/* Bottom Actions */}
-        <div className="border-t border-gray-200 p-4 space-y-2">
+        <div className="border-t border-emerald-500/20 p-4 space-y-2 relative z-10">
           <Link
             href="/"
-            className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
+            className="flex items-center px-3 py-2 text-gray-400 hover:text-emerald-400 hover:bg-gray-800/50 rounded-lg transition-all"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -281,7 +284,7 @@ export default function DashboardLayout({ children }) {
           </Link>
           <button
             onClick={logout}
-            className="flex items-center px-3 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all w-full"
+            className="flex items-center px-3 py-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all w-full"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -290,7 +293,7 @@ export default function DashboardLayout({ children }) {
           </button>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="flex items-center justify-center w-full py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
+            className="flex items-center justify-center w-full py-2 text-gray-400 hover:text-emerald-400 hover:bg-gray-800/50 rounded-lg transition-all"
           >
             <svg className={`w-5 h-5 transition-transform ${sidebarOpen ? '' : 'rotate-180'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
@@ -300,7 +303,7 @@ export default function DashboardLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto bg-gray-50">
+      <main className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-900 via-gray-900 to-black">
         {children}
       </main>
     </div>

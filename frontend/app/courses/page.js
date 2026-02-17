@@ -100,31 +100,36 @@ Downloaded on: ${new Date().toLocaleString()}
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black">
       {/* Hero Section - Matching Home Page */}
-      <section className="relative bg-gradient-to-br from-primary-700 via-primary-600 to-accent-600 text-white pt-32 pb-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white pt-40 pb-32 overflow-hidden spotlight">
         {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
+        <div className="absolute inset-0 tech-grid opacity-20"></div>
+        <div className="absolute top-20 left-10 w-96 h-96 bg-emerald-500/10 rounded-full mix-blend-screen filter blur-3xl animate-blob"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-green-500/10 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-2000"></div>
+        
+        <div className="absolute top-1/4 right-1/4 opacity-20">
+          <div className="hexagon hexagon-network"></div>
         </div>
+        
+        <div className="absolute top-1/3 left-1/4 glowing-dot"></div>
+        <div className="absolute top-2/3 right-1/3 glowing-dot delay-200"></div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8 animate-fadeInUp">
-              <span className="w-2 h-2 bg-accent-400 rounded-full mr-2 animate-pulse"></span>
-              <span className="text-sm font-medium">Explore Our Course Catalog</span>
+            <div className="inline-flex items-center px-4 py-2 glass-dark rounded-full border border-emerald-500/30 mb-8 animate-fadeInUp">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
+              <span className="text-sm font-medium text-emerald-400">Explore Our Course Catalog</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6 leading-tight animate-fadeInUp delay-100">
               Professional Courses for 
-              <span className="block mt-2 bg-gradient-to-r from-accent-200 to-white bg-clip-text text-transparent">
+              <span className="block mt-2 gradient-text-emerald neon-glow">
                 Skill Development
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-green-100 mb-8 leading-relaxed max-w-3xl mx-auto animate-fadeInUp delay-200">
+            <p className="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed max-w-3xl mx-auto animate-fadeInUp delay-200">
               Explore our wide range of courses designed to enhance your skills and advance your career through expert-led training programs
             </p>
           </div>
@@ -132,22 +137,22 @@ Downloaded on: ${new Date().toLocaleString()}
       </section>
 
       {/* Courses Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gradient-to-b from-black to-gray-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {courses.length === 0 ? (
               <div className="text-center py-20">
-                <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/30">
+                  <svg className="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
                 </div>
-                <p className="text-gray-600 text-lg">No courses available at the moment.</p>
+                <p className="text-gray-300 text-lg">No courses available at the moment.</p>
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {courses.map((course) => (
-                  <div key={course._id} className="rounded-xl bg-white border border-gray-200 shadow-soft overflow-hidden hover:shadow-medium hover:border-primary-300 transition-all group flex flex-col h-full">
+                  <div key={course._id} className="rounded-xl glass-dark border border-emerald-500/20 shadow-lg overflow-hidden hover:shadow-emerald-glow hover:border-emerald-500/40 transition-all group flex flex-col h-full">
                     {course.image && (
                       <div className="h-48 overflow-hidden flex-shrink-0">
                         <img 
@@ -167,22 +172,22 @@ Downloaded on: ${new Date().toLocaleString()}
                         </span>
                       </div>
                       
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-700 transition-colors font-display">{course.title}</h3>
+                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors font-display">{course.title}</h3>
                       
-                      <p className="text-sm text-gray-600 mb-4 leading-relaxed line-clamp-2">{course.description}</p>
+                      <p className="text-sm text-gray-300 mb-4 leading-relaxed line-clamp-2">{course.description}</p>
                       
                       {course.syllabus && course.syllabus.length > 0 && (
-                        <div className="mb-4 pb-4 border-b border-gray-100">
-                          <h4 className="text-sm font-semibold text-gray-900 mb-3 flex items-center">
-                            <svg className="w-4 h-4 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="mb-4 pb-4 border-b border-gray-800">
+                          <h4 className="text-sm font-semibold text-white mb-3 flex items-center">
+                            <svg className="w-4 h-4 text-emerald-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             What You'll Learn
                           </h4>
                           <ul className="space-y-2">
                             {course.syllabus.slice(0, 3).map((item, index) => (
-                              <li key={index} className="flex items-start text-sm text-gray-600">
-                                <svg className="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                              <li key={index} className="flex items-start text-sm text-gray-300">
+                                <svg className="w-4 h-4 text-emerald-400 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                 </svg>
                                 <span className="leading-relaxed">{item}</span>
@@ -192,16 +197,16 @@ Downloaded on: ${new Date().toLocaleString()}
                         </div>
                       )}
                       
-                      <div className="mt-auto pt-4 border-t border-gray-100">
+                      <div className="mt-auto pt-4 border-t border-gray-800">
                         <div className="flex justify-between items-center mb-4">
-                          <span className="text-sm text-gray-600 flex items-center font-medium">
-                            <svg className="w-4 h-4 mr-1.5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <span className="text-sm text-gray-300 flex items-center font-medium">
+                            <svg className="w-4 h-4 mr-1.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             {course.duration}
                           </span>
                           {course.price > 0 && (
-                            <span className="text-2xl font-bold text-primary-700">${course.price}</span>
+                            <span className="text-2xl font-bold gradient-text-emerald">${course.price}</span>
                           )}
                         </div>
                         
@@ -216,13 +221,13 @@ Downloaded on: ${new Date().toLocaleString()}
                         )}
                         
                         <div className="flex gap-2">
-                          <Link href="/dashboard/enroll" className="btn-primary flex-1 text-center">
+                          <Link href={`/dashboard/enroll?courseId=${course._id}`} className="btn-primary flex-1 text-center">
                             Enroll Now
                           </Link>
                           <button
                             onClick={() => handleDownloadDetails(course)}
                             disabled={downloadingId === course._id}
-                            className="px-4 py-3 bg-white border-2 border-primary-700 text-primary-700 rounded-lg font-semibold hover:bg-primary-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                            className="px-4 py-3 glass-dark border-2 border-emerald-500/30 text-emerald-400 rounded-lg font-semibold hover:bg-emerald-500/10 hover:border-emerald-500/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                             title="Download Course Details"
                           >
                             {downloadingId === course._id ? (
