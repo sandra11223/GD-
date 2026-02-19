@@ -877,6 +877,22 @@
     backdrop-filter: blur(12px);
   }
 
+  /* Hide browser default password reveal icons */
+  input[type="password"]::-ms-reveal,
+  input[type="password"]::-ms-clear {
+    display: none;
+  }
+  
+  input[type="password"]::-webkit-credentials-auto-fill-button,
+  input[type="password"]::-webkit-contacts-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    height: 0;
+    width: 0;
+    margin: 0;
+  }
+
   /* Badge Styles */
   .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
