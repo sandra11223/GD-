@@ -9,7 +9,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-[#0a0e1a]/95 border-b border-emerald-500/30 fixed top-0 left-0 right-0 z-50 shadow-lg shadow-emerald-500/10 backdrop-blur-xl">
+    <nav className="fixed-navbar !fixed top-0 left-0 right-0 z-[9999] bg-[#0a0e1a]/95 border-b border-emerald-500/30 shadow-lg shadow-emerald-500/10 backdrop-blur-xl">
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
         backgroundImage: `
           linear-gradient(rgba(0, 217, 163, 0.1) 1px, transparent 1px),

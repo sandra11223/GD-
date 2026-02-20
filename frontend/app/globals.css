@@ -2145,6 +2145,15 @@ button, a, [role="button"] {
   @apply sticky top-0 z-40 bg-gray-900/95 backdrop-blur-md;
 }
 
+/* Fixed Navbar - Ensure it stays fixed on all pages */
+nav.fixed-navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+}
+
 /* Mobile-optimized spacing utilities */
 .mobile-px {
   @apply px-4;
