@@ -31,6 +31,10 @@ const courseSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+  instructor: {
+    type: String,
+    default: ''
+  },
   syllabus: [{
     type: String
   }],

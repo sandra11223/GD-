@@ -2809,3 +2809,49 @@ button, a, [role="button"] {
     transform: translateX(0) scale(1);
   }
 }
+
+@keyframes spreadRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.animate-spreadScale {
+  animation: spreadScale 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-spreadTopLeft {
+  animation: spreadTopLeft 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-spreadTopRight {
+  animation: spreadTopRight 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-spreadBottomLeft {
+  animation: spreadBottomLeft 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-spreadBottomRight {
+  animation: spreadBottomRight 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-spreadLeft {
+  animation: spreadLeft 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-spreadRight {
+  animation: spreadRight 1s ease-out forwards;
+  opacity: 0;
+}

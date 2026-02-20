@@ -7,8 +7,10 @@ const { protect, admin } = require('../middleware/auth');
 router.post('/subscribe', subscribe);
 router.post('/unsubscribe', unsubscribe);
 
-// Admin routes
-router.get('/', protect, admin, getAllSubscribers);
+// Protected routes (all authenticated users can view)
+router.get('/', protect, getAllSubscribers);
+
+// Admin only routes
 router.delete('/:id', protect, admin, deleteSubscriber);
 
 module.exports = router;

@@ -38,14 +38,14 @@ export default function Footer() {
       
       {/* Newsletter Section */}
       <div className="bg-gradient-to-r from-emerald-900/20 to-green-900/20 border-b border-emerald-500/20 relative z-10">
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <h3 className="text-3xl font-bold text-white mb-2 gradient-text-emerald">Stay Updated</h3>
-              <p className="text-gray-300 text-lg">Subscribe to our newsletter for the latest updates and opportunities</p>
+            <div className="text-center md:text-left w-full md:w-auto">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 gradient-text-emerald">Stay Updated</h3>
+              <p className="text-gray-300 text-base sm:text-lg">Subscribe to our newsletter for the latest updates</p>
             </div>
             <form onSubmit={handleSubscribe} className="flex flex-col gap-2 w-full md:w-auto">
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2 w-full">
                 <input 
                   type="email" 
                   placeholder="Enter your email" 
@@ -53,21 +53,21 @@ export default function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={loading}
-                  className="px-5 py-4 bg-gray-900/70 border-2 border-emerald-500/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all flex-1 md:w-80 disabled:opacity-50 backdrop-blur-sm"
+                  className="px-4 sm:px-5 py-3 sm:py-4 bg-gray-900/70 border-2 border-emerald-500/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all w-full sm:w-64 md:w-80 disabled:opacity-50 backdrop-blur-sm text-sm sm:text-base"
                 />
                 <button 
                   type="submit" 
                   disabled={loading}
-                  className="px-8 py-4 bg-gradient-to-r from-emerald-400 to-green-500 text-gray-900 rounded-xl font-semibold hover:from-emerald-500 hover:to-green-600 transition-all shadow-emerald-glow hover:shadow-emerald-glow-lg whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-emerald-400 to-green-500 text-gray-900 rounded-xl font-semibold hover:from-emerald-500 hover:to-green-600 transition-all shadow-emerald-glow hover:shadow-emerald-glow-lg whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto text-sm sm:text-base"
                 >
                   {loading ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </div>
               {message && (
-                <p className="text-sm text-emerald-400 text-center md:text-left">{message}</p>
+                <p className="text-xs sm:text-sm text-emerald-400 text-center md:text-left">{message}</p>
               )}
               {error && (
-                <p className="text-sm text-red-400 text-center md:text-left">{error}</p>
+                <p className="text-xs sm:text-sm text-red-400 text-center md:text-left">{error}</p>
               )}
             </form>
           </div>

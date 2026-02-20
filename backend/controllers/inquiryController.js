@@ -47,9 +47,23 @@ const updateInquiryStatus = async (req, res) => {
   }
 };
 
+const getPublicInquiries = async (req, res) => {
+  try {
+    // Return all inquiries without authentication requirement
+    // Only return basic info, not sensitive user data
+    const inquiries = await Inquiry.find()
+      .select('name email phone subject message status createdAt')
+      .sort('-createdAt');
+    res.json(inquiries);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createInquiry,
   getUserInquiries,
   getAllInquiries,
-  updateInquiryStatus
+  updateInquiryStatus,
+  getPublicInquiries
 };

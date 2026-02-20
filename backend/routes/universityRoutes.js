@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get('/', getUniversities);
 router.get('/:id', getUniversityById);
-router.post('/', protect, admin, createUniversity);
+router.post('/', protect, createUniversity); // Allow any authenticated user to create
 router.put('/:id', protect, admin, updateUniversity);
 router.delete('/:id', protect, admin, deleteUniversity);
 

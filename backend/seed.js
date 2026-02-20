@@ -1,8 +1,14 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const Course = require('./models/Course');
 const University = require('./models/University');
 const Service = require('./models/Service');
+const Inquiry = require('./models/Inquiry');
+const Enrollment = require('./models/Enrollment');
+const Partnership = require('./models/Partnership');
+const User = require('./models/User');
+const Newsletter = require('./models/Newsletter');
 
 const connectDB = async () => {
   try {
@@ -14,6 +20,7 @@ const connectDB = async () => {
   }
 };
 
+// Sample data for demonstration
 const courses = [
   {
     title: "Business Management & Leadership",
@@ -47,39 +54,6 @@ const courses = [
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
     syllabus: ["SEO Fundamentals", "Social Media Marketing", "Content Strategy", "Email Marketing", "Analytics"],
     isActive: true
-  },
-  {
-    title: "Project Management Professional (PMP)",
-    description: "Industry-recognized certification preparation course. Learn project planning, execution, and delivery methodologies used by leading organizations worldwide.",
-    duration: "8 weeks",
-    level: "Intermediate",
-    category: "Management",
-    price: 2200,
-    image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=800",
-    syllabus: ["Project Planning", "Risk Management", "Agile Methodologies", "Stakeholder Management", "Quality Control"],
-    isActive: true
-  },
-  {
-    title: "Cybersecurity Fundamentals",
-    description: "Essential cybersecurity training for IT professionals and organizations. Learn to protect systems, networks, and data from cyber threats.",
-    duration: "14 weeks",
-    level: "Intermediate",
-    category: "Technology",
-    price: 2800,
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800",
-    syllabus: ["Network Security", "Ethical Hacking", "Cryptography", "Security Policies", "Incident Response"],
-    isActive: true
-  },
-  {
-    title: "Financial Analysis & Investment",
-    description: "Advanced financial modeling and investment analysis course. Perfect for finance professionals and corporate decision-makers.",
-    duration: "12 weeks",
-    level: "Advanced",
-    category: "Finance",
-    price: 3200,
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800",
-    syllabus: ["Financial Modeling", "Investment Analysis", "Portfolio Management", "Risk Assessment", "Corporate Finance"],
-    isActive: true
   }
 ];
 
@@ -89,10 +63,12 @@ const universities = [
     country: "United States",
     city: "Cambridge, MA",
     description: "One of the world's most prestigious universities, Harvard offers exceptional programs across all disciplines. Strong B2B partnerships for executive education and research collaborations.",
-    ranking: 1,
+    ranking: "Top 1",
     website: "https://www.harvard.edu",
     logo: "https://images.unsplash.com/photo-1562774053-701939374585?w=400",
-    programs: ["Business Administration", "Law", "Medicine", "Engineering", "Computer Science"],
+    image: "https://images.unsplash.com/photo-1562774053-701939374585?w=800",
+    programs: "Business Administration, Law, Medicine, Engineering, Computer Science",
+    students: "20,000+ Students",
     tuitionFee: "$50,000 - $75,000/year",
     isActive: true
   },
@@ -101,10 +77,12 @@ const universities = [
     country: "United States",
     city: "Stanford, CA",
     description: "Leading institution in technology and innovation. Excellent partnerships for corporate training programs and technology transfer initiatives.",
-    ranking: 2,
+    ranking: "Top 2",
     website: "https://www.stanford.edu",
     logo: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400",
-    programs: ["Computer Science", "Engineering", "Business", "Medicine", "Law"],
+    image: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=800",
+    programs: "Computer Science, Engineering, Business, Medicine, Law",
+    students: "17,000+ Students",
     tuitionFee: "$55,000 - $80,000/year",
     isActive: true
   },
@@ -113,10 +91,12 @@ const universities = [
     country: "United Kingdom",
     city: "Oxford",
     description: "Historic institution with cutting-edge research facilities. Strong B2B programs in executive education and international student exchanges.",
-    ranking: 3,
+    ranking: "Top 3",
     website: "https://www.ox.ac.uk",
     logo: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400",
-    programs: ["Philosophy", "Politics", "Economics", "Medicine", "Law"],
+    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800",
+    programs: "Philosophy, Politics, Economics, Medicine, Law",
+    students: "24,000+ Students",
     tuitionFee: "£25,000 - £40,000/year",
     isActive: true
   },
@@ -125,35 +105,13 @@ const universities = [
     country: "United States",
     city: "Cambridge, MA",
     description: "World leader in science and technology education. Exceptional corporate partnership programs and research collaboration opportunities.",
-    ranking: 4,
+    ranking: "Top 4",
     website: "https://www.mit.edu",
     logo: "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400",
-    programs: ["Engineering", "Computer Science", "Physics", "Mathematics", "Business"],
+    image: "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=800",
+    programs: "Engineering, Computer Science, Physics, Mathematics, Business",
+    students: "11,000+ Students",
     tuitionFee: "$53,000 - $77,000/year",
-    isActive: true
-  },
-  {
-    name: "University of Cambridge",
-    country: "United Kingdom",
-    city: "Cambridge",
-    description: "Renowned for academic excellence and research innovation. Strong partnerships for group enrollments and scholarship programs.",
-    ranking: 5,
-    website: "https://www.cam.ac.uk",
-    logo: "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=400",
-    programs: ["Natural Sciences", "Engineering", "Medicine", "Law", "Business"],
-    tuitionFee: "£24,000 - £38,000/year",
-    isActive: true
-  },
-  {
-    name: "National University of Singapore",
-    country: "Singapore",
-    city: "Singapore",
-    description: "Asia's leading university with strong global partnerships. Excellent programs for international students and corporate training initiatives.",
-    ranking: 11,
-    website: "https://www.nus.edu.sg",
-    logo: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400",
-    programs: ["Engineering", "Business", "Computer Science", "Medicine", "Law"],
-    tuitionFee: "S$30,000 - S$50,000/year",
     isActive: true
   }
 ];
@@ -197,47 +155,115 @@ const services = [
       "Student exchange coordination"
     ],
     isActive: true
-  },
-  {
-    title: "Admission Support Services",
-    description: "End-to-end admission support for educational institutions and their students. From application preparation to acceptance, we handle the entire process with dedicated support teams.",
-    icon: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800",
-    features: [
-      "Application review and optimization",
-      "Document preparation assistance",
-      "Interview coaching",
-      "Deadline management",
-      "Post-admission support"
-    ],
-    isActive: true
-  },
-  {
-    title: "Language Training Programs",
-    description: "Professional language training solutions for international education preparation. IELTS, TOEFL, and other language proficiency programs designed for institutional partnerships.",
-    icon: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800",
-    features: [
-      "IELTS and TOEFL preparation",
-      "Business English courses",
-      "Group training packages",
-      "Online and in-person options",
-      "Certified instructors"
-    ],
-    isActive: true
-  },
-  {
-    title: "Career Counseling & Placement",
-    description: "Professional career guidance and placement services for students and institutions. Connect with global employers and prepare students for international career opportunities.",
-    icon: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800",
-    features: [
-      "Career assessment and planning",
-      "Resume and portfolio development",
-      "Interview preparation",
-      "Employer networking events",
-      "Job placement assistance"
-    ],
-    isActive: true
   }
 ];
+
+const inquiries = [
+  {
+    name: "John Smith",
+    email: "john.smith@techcorp.com",
+    phone: "+1 (555) 123-4567",
+    subject: "Course Inquiry - Technology",
+    message: "We are interested in enrolling 20 employees in your Data Science & Analytics course. Please provide bulk pricing and scheduling options.",
+    status: "pending"
+  },
+  {
+    name: "Sarah Johnson",
+    email: "sarah.j@edugroup.com",
+    phone: "+1 (555) 234-5678",
+    subject: "University Partnership Inquiry - United States",
+    message: "Looking to establish partnership with top US universities for our international students. Interested in scholarship opportunities.",
+    status: "in-progress"
+  },
+  {
+    name: "Michael Chen",
+    email: "m.chen@globalinstitute.edu",
+    phone: "+1 (555) 345-6789",
+    subject: "Service Inquiry - Corporate Skill Development",
+    message: "Need customized training program for our management team. Approximately 50 participants over 3 months.",
+    status: "resolved"
+  },
+  {
+    name: "Emily Davis",
+    email: "emily.davis@businessacademy.com",
+    phone: "+1 (555) 456-7890",
+    subject: "Course Inquiry - Business",
+    message: "Interested in Business Management & Leadership course for our executive team. Need flexible scheduling.",
+    status: "pending"
+  }
+];
+
+const enrollments = [
+  {
+    studentName: "Robert Wilson",
+    email: "r.wilson@company.com",
+    phone: "+1 (555) 567-8901",
+    courseName: "Business Management & Leadership",
+    institutionName: "Global Business Institute",
+    numberOfStudents: 15,
+    preferredStartDate: new Date('2024-03-01'),
+    message: "Enrolling our senior management team for leadership development.",
+    status: "approved"
+  },
+  {
+    studentName: "Lisa Anderson",
+    email: "l.anderson@techstart.com",
+    phone: "+1 (555) 678-9012",
+    courseName: "Data Science & Analytics",
+    institutionName: "TechStart Academy",
+    numberOfStudents: 25,
+    preferredStartDate: new Date('2024-03-15'),
+    message: "Bulk enrollment for our data analytics team.",
+    status: "approved"
+  },
+  {
+    studentName: "David Martinez",
+    email: "d.martinez@marketing.pro",
+    phone: "+1 (555) 789-0123",
+    courseName: "Digital Marketing Mastery",
+    institutionName: "Marketing Pro Institute",
+    numberOfStudents: 10,
+    preferredStartDate: new Date('2024-04-01'),
+    message: "Training our marketing department in digital strategies.",
+    status: "pending"
+  }
+];
+
+const partnerships = [
+  {
+    companyName: "Global Education Network",
+    contactPerson: "James Thompson",
+    email: "j.thompson@globaledu.net",
+    phone: "+1 (555) 890-1234",
+    website: "https://globaledu.net",
+    partnershipType: "University Collaboration",
+    description: "Seeking partnership to place 100+ students annually in top universities. We have strong network in Asia-Pacific region.",
+    status: "approved"
+  },
+  {
+    companyName: "Corporate Training Solutions",
+    contactPerson: "Maria Garcia",
+    email: "m.garcia@corptraining.com",
+    phone: "+1 (555) 901-2345",
+    website: "https://corptraining.com",
+    partnershipType: "Course Provider",
+    description: "Interested in becoming authorized training partner for corporate skill development programs.",
+    status: "approved"
+  },
+  {
+    companyName: "International Student Services",
+    contactPerson: "Ahmed Hassan",
+    email: "a.hassan@intlstudent.org",
+    phone: "+1 (555) 012-3456",
+    website: "https://intlstudent.org",
+    partnershipType: "Student Placement",
+    description: "Partnership for student placement and visa support services across multiple countries.",
+    status: "pending"
+  }
+];
+
+// No demo newsletter subscribers - only real subscriptions will appear
+const newsletterSubscribers = [];
 
 const seedDatabase = async () => {
   try {
@@ -247,11 +273,27 @@ const seedDatabase = async () => {
     await Course.deleteMany({});
     await University.deleteMany({});
     await Service.deleteMany({});
+    await Inquiry.deleteMany({});
+    await Enrollment.deleteMany({});
+    await Partnership.deleteMany({});
+    await User.deleteMany({});
+    await Newsletter.deleteMany({});
 
     console.log('Existing data cleared');
 
-    // Insert new data
-    await Course.insertMany(courses);
+    // Create demo user
+    const hashedPassword = await bcrypt.hash('demo123', 10);
+    const demoUser = await User.create({
+      name: 'Demo User',
+      email: 'demo@example.com',
+      password: hashedPassword,
+      role: 'partner',
+      companyName: 'Demo Company'
+    });
+    console.log('Demo user created');
+
+    // Insert courses, universities, services
+    const insertedCourses = await Course.insertMany(courses);
     console.log('Courses seeded successfully');
 
     await University.insertMany(universities);
@@ -259,6 +301,44 @@ const seedDatabase = async () => {
 
     await Service.insertMany(services);
     console.log('Services seeded successfully');
+
+    // Add user reference to inquiries
+    const inquiriesWithUser = inquiries.map(inq => ({
+      ...inq,
+      user: demoUser._id
+    }));
+    await Inquiry.insertMany(inquiriesWithUser);
+    console.log('Inquiries seeded successfully');
+
+    // Add user and course reference to enrollments
+    const enrollmentsWithUser = enrollments.map((enr, index) => ({
+      user: demoUser._id,
+      course: insertedCourses[index % insertedCourses.length]._id,
+      studentName: enr.studentName,
+      email: enr.email,
+      phone: enr.phone,
+      education: enr.institutionName,
+      status: enr.status
+    }));
+    await Enrollment.insertMany(enrollmentsWithUser);
+    console.log('Enrollments seeded successfully');
+
+    // Add user reference to partnerships
+    const partnershipsWithUser = partnerships.map(part => ({
+      ...part,
+      user: demoUser._id,
+      country: 'United States'
+    }));
+    await Partnership.insertMany(partnershipsWithUser);
+    console.log('Partnerships seeded successfully');
+
+    // Add newsletter subscribers (only if there are any)
+    if (newsletterSubscribers.length > 0) {
+      await Newsletter.insertMany(newsletterSubscribers);
+      console.log('Newsletter subscribers seeded successfully');
+    } else {
+      console.log('No demo newsletter subscribers - waiting for real subscriptions');
+    }
 
     console.log('Database seeded successfully!');
     process.exit(0);

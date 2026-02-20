@@ -1,125 +1,175 @@
 # Quick Start Guide - Global Education Council
 
-## Prerequisites
-- Node.js (v16 or higher)
-- MongoDB Atlas account (free tier available)
-- Git
+## Prerequisites Check
 
-## 🚀 Quick Setup (5 minutes)
+Before starting, ensure you have:
+- ✅ Node.js installed (v14 or higher)
+- ✅ MongoDB running locally OR MongoDB Atlas account
+- ✅ npm or yarn package manager
 
-### Step 1: MongoDB Atlas Setup (2 minutes)
-
-1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and sign up/login
-2. Create a **FREE** cluster (M0 Sandbox)
-3. Create a database user:
-   - Username: `admin` (or your choice)
-   - Password: Click "Autogenerate Secure Password" and **SAVE IT**
-4. Add IP Address: Click "Allow Access from Anywhere" (for development)
-5. Get connection string:
-   - Click "Connect" → "Connect your application"
-   - Copy the connection string
-
-### Step 2: Backend Setup (2 minutes)
+## Step 1: Install Dependencies
 
 ```bash
-# Navigate to backend folder
+# Install backend dependencies
 cd backend
-
-# Install dependencies
 npm install
 
-# Create .env file
-# Copy the content below and replace with your MongoDB Atlas credentials
+# Install frontend dependencies
+cd ../frontend
+npm install
 ```
 
-Create `backend/.env` file:
-```env
-MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/global-education-council?retryWrites=true&w=majority
-JWT_SECRET=global_education_council_super_secret_jwt_key_2024
-PORT=5000
-NODE_ENV=development
+## Step 2: Configure MongoDB
+
+Your `.env` file is already configured for **local MongoDB**:
+```
+MONGODB_URI=mongodb://localhost:27017/global-education-council
 ```
 
-**Replace:**
-- `YOUR_USERNAME` with your MongoDB Atlas username
-- `YOUR_PASSWORD` with your MongoDB Atlas password
-- `cluster0.xxxxx.mongodb.net` with your actual cluster URL
+### Option A: Use Local MongoDB
+Make sure MongoDB is running on your machine:
+- **Windows**: Check Services for "MongoDB" service
+- **Mac**: `brew services start mongodb-community`
+- **Linux**: `sudo systemctl start mongodb`
 
-**Test the connection:**
+### Option B: Use MongoDB Atlas (Cloud)
+1. Create free account at https://www.mongodb.com/cloud/atlas
+2. Create a cluster and get connection string
+3. Update `backend/.env` with your Atlas connection string:
+   ```
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/global-education-council?retryWrites=true&w=majority
+   ```
+
+See `MONGODB_SETUP_GUIDE.md` for detailed instructions.
+
+## Step 3: Test MongoDB Connection
+
 ```bash
-npm run test-db
-```
-
-If successful, you'll see: ✅ SUCCESS! MongoDB Connected
-
-**Start the backend:**
-```bash
-npm run dev
+cd backend
+node test-connection.js
 ```
 
 You should see:
 ```
-✅ Server running on port 5000
-✅ MongoDB Connected: cluster0-xxxxx.mongodb.net
+✅ SUCCESS! MongoDB Connected
+📍 Host: localhost (or your Atlas cluster)
+📁 Database: global-education-council
 ```
 
-### Step 3: Frontend Setup (1 minute)
-
-Open a **NEW terminal** window:
-
-```bash
-# Navigate to frontend folder
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start the frontend
-npm run dev
-```
-
-The frontend will start on `http://localhost:3001`
-
-### Step 4: Test Registration
-
-1. Open browser to `http://localhost:3001`
-2. Click "Register" or go to `http://localhost:3001/register`
-3. Fill in the form:
-   - Full Name: Test User
-   - Email: test@example.com
-   - Company Name: Test Company
-   - Phone: +1 234 567 8900
-   - Password: password123
-   - Confirm Password: password123
-4. Click "Create Account"
-5. You should be redirected to the dashboard ✅
-
-## 🎯 Seed Sample Data (Optional)
-
-To add sample courses, universities, and services:
+## Step 4: Seed Initial Data
 
 ```bash
 cd backend
-npm run seed
+node seed.js
 ```
 
-## 🔍 Verify Everything is Working
+This creates:
+- Admin user: `admin@globaleducation.com` / `admin123`
+- Sample courses, universities, and services
 
-### Check Backend:
-- Open `http://localhost:5000` in browser
-- You should see: `{"message":"Global Education Council API","status":"running"}`
+## Step 5: Start Backend Server
 
-### Check Frontend:
-- Open `http://localhost:3001`
-- You should see the home page with dark theme and emerald colors
+```bash
+cd backend
+npm start
+```
 
-### Check Database:
-1. Go to MongoDB Atlas dashboard
-2. Click "Browse Collections"
-3. You should see `global-education-council` database
-4. Click on `users` collection to see your registered user
+Server will run on: http://localhost:5000
 
-## 📁 Project Structure
+You should see:
+```
+✅ MongoDB Connected: localhost
+✅ Database Name: global-education-council
+🚀 Server running on port 5000
+```
+
+## Step 6: Start Frontend
+
+Open a new terminal:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Frontend will run on: http://localhost:3000
+
+## Step 7: Access the Application
+
+### Public Pages
+- Home: http://localhost:3000
+- About: http://localhost:3000/about
+- Services: http://localhost:3000/services
+- Courses: http://localhost:3000/courses
+- Universities: http://localhost:3000/universities
+- Contact: http://localhost:3000/contact
+- Blog: http://localhost:3000/blog
+
+### Authentication
+- Login: http://localhost:3000/login
+- Register: http://localhost:3000/register
+
+### Admin Dashboard (after login)
+- Dashboard: http://localhost:3000/dashboard
+- Browse Courses: http://localhost:3000/dashboard/browse-courses
+- My Enrollments: http://localhost:3000/dashboard/my-enrollments
+
+### Admin Credentials
+```
+Email: admin@globaleducation.com
+Password: admin123
+```
+
+## API Endpoints
+
+Backend API is available at: http://localhost:5000/api
+
+### Test Endpoints:
+- GET http://localhost:5000/api/courses - List all courses
+- GET http://localhost:5000/api/universities - List all universities
+- GET http://localhost:5000/api/services - List all services
+
+## Troubleshooting
+
+### Backend won't start
+1. Check MongoDB is running: `node test-connection.js`
+2. Check port 5000 is available
+3. Verify `.env` file exists in backend folder
+
+### Frontend won't start
+1. Check `frontend/.env.local` exists
+2. Verify backend is running on port 5000
+3. Clear cache: `rm -rf .next` then `npm run dev`
+
+### Can't login
+1. Make sure you ran `node seed.js`
+2. Try registering a new account
+3. Check backend console for errors
+
+### Images not loading
+- Images use external URLs (Pexels, Unsplash)
+- Check your internet connection
+- Some images may be blocked by firewall/proxy
+
+## Development Commands
+
+### Backend
+```bash
+npm start          # Start server
+npm run dev        # Start with nodemon (auto-restart)
+node seed.js       # Seed database
+node test-connection.js  # Test MongoDB connection
+```
+
+### Frontend
+```bash
+npm run dev        # Start development server
+npm run build      # Build for production
+npm start          # Start production server
+npm run lint       # Run linter
+```
+
+## Project Structure
 
 ```
 global-education-council/
@@ -129,114 +179,36 @@ global-education-council/
 │   ├── middleware/      # Auth & error handling
 │   ├── models/          # MongoDB models
 │   ├── routes/          # API routes
-│   ├── .env            # Environment variables (create this)
+│   ├── .env            # Environment variables
 │   ├── server.js       # Express server
-│   └── package.json
+│   └── seed.js         # Database seeding
 │
 ├── frontend/
 │   ├── app/            # Next.js pages
 │   ├── components/     # React components
-│   ├── context/        # Auth context
-│   ├── services/       # API service
-│   ├── .env.local      # Frontend env (already configured)
+│   ├── services/       # API services
+│   ├── .env.local      # Frontend environment
 │   └── package.json
 │
 └── README.md
 ```
 
-## 🐛 Troubleshooting
+## Next Steps
 
-### "MongoServerError: bad auth"
-- Check username and password in `.env`
-- Make sure password doesn't have special characters (or URL encode them)
+1. ✅ Explore the application
+2. ✅ Customize content and styling
+3. ✅ Add your own courses and universities
+4. ✅ Configure email notifications
+5. ✅ Deploy to production
 
-### "Could not connect to MongoDB"
-- Check Network Access in MongoDB Atlas
-- Make sure "Allow Access from Anywhere" is enabled
-- Verify connection string format
+## Support
 
-### "Registration failed" or "Network Error"
-- Make sure backend is running on port 5000
-- Check backend terminal for errors
-- Open browser console (F12) for detailed errors
+For detailed MongoDB setup, see: `MONGODB_SETUP_GUIDE.md`
 
-### Port already in use
-```bash
-# Kill process on port 5000 (backend)
-# Windows:
-netstat -ano | findstr :5000
-taskkill /PID <PID> /F
+For design documentation, see the various `.md` files in the root directory.
 
-# Kill process on port 3001 (frontend)
-netstat -ano | findstr :3001
-taskkill /PID <PID> /F
-```
+---
 
-## 🔐 Default Admin Account
+**You're all set! 🚀**
 
-After seeding, you can login with:
-- Email: `admin@globaleducation.com`
-- Password: `admin123`
-
-## 📚 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/profile` - Get user profile (protected)
-- `PUT /api/auth/profile` - Update profile (protected)
-
-### Courses
-- `GET /api/courses` - Get all courses
-- `POST /api/courses` - Create course (admin only)
-- `PUT /api/courses/:id` - Update course (admin only)
-- `DELETE /api/courses/:id` - Delete course (admin only)
-
-### Universities
-- `GET /api/universities` - Get all universities
-- `POST /api/universities` - Create university (admin only)
-
-### Services
-- `GET /api/services` - Get all services
-- `POST /api/services` - Create service (admin only)
-
-### Enrollments
-- `POST /api/enrollments` - Create enrollment (protected)
-- `GET /api/enrollments` - Get user enrollments (protected)
-
-### Inquiries
-- `POST /api/inquiries` - Submit inquiry
-- `GET /api/inquiries` - Get all inquiries (admin only)
-
-### Partnerships
-- `POST /api/partnerships` - Submit partnership request
-- `GET /api/partnerships` - Get all partnerships (admin only)
-
-### Newsletter
-- `POST /api/newsletter/subscribe` - Subscribe to newsletter
-
-## 🚀 Next Steps
-
-1. ✅ Complete MongoDB Atlas setup
-2. ✅ Test registration and login
-3. ✅ Seed sample data
-4. 🎨 Customize the design
-5. 📝 Add more features
-6. 🌐 Deploy to production
-
-## 📞 Need Help?
-
-Check the detailed guides:
-- `MONGODB_ATLAS_SETUP.md` - Detailed MongoDB Atlas setup
-- `README.md` - Full project documentation
-
-## 🎉 You're All Set!
-
-Your application is now running with:
-- ✅ Backend API on `http://localhost:5000`
-- ✅ Frontend on `http://localhost:3001`
-- ✅ MongoDB Atlas database connected
-- ✅ Authentication working
-- ✅ Dark theme with emerald colors
-
-Happy coding! 🚀
+The application is fully configured and ready to use. Both local MongoDB and MongoDB Atlas are supported.
