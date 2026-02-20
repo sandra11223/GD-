@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function About() {
   return (
-    <div className="min-h-screen puzzle-bg-dark pt-16">
+    <div className="min-h-screen puzzle-bg-dark pt-20 md:pt-16">
       {/* Hero Section - Full Screen Like Home Page */}
       <section className="relative min-h-screen flex items-center overflow-hidden puzzle-bg">
         {/* Large Background Image */}

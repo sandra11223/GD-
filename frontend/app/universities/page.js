@@ -43,7 +43,7 @@ export default function Universities() {
   }
 
   return (
-    <div className="min-h-screen puzzle-bg-dark pt-16">
+    <div className="min-h-screen puzzle-bg-dark pt-20 md:pt-16">
       {/* Hero Section - Split Layout with Animated Images */}
       <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0a0e1a] via-[#0f1729] to-[#0a0e1a]">
         {/* Background Image - Students Studying */}

@@ -25,7 +25,7 @@ export default function Home() {
         }}
       />
       
-      <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black pt-16">
+      <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black pt-20 md:pt-16">
         {/* Hero Section - Modern Asymmetric Design */}
         <section className="relative min-h-screen flex items-center overflow-hidden">
           {/* Animated Background */}

@@ -62,7 +62,7 @@ export default function Courses() {
   }
 
   return (
-    <div className="min-h-screen puzzle-bg-dark pt-16">
+    <div className="min-h-screen puzzle-bg-dark pt-20 md:pt-16">
       {/* Hero Section - Split Layout with Photos and Background (Home Page Style) */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden puzzle-bg">
         {/* Large Background Image - More Visible */}
