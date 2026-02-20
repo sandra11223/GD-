@@ -24,13 +24,18 @@ const getCourseById = async (req, res) => {
 
 const createCourse = async (req, res) => {
   try {
+    console.log('Received course data:', req.body);
     const course = await Course.create(req.body);
+    console.log('Course created successfully:', course);
     res.status(201).json(course);
   } catch (error) {
+    console.error('Error creating course:', error);
     if (error.name === 'ValidationError') {
       const errors = Object.values(error.errors).map(err => err.message);
+      console.error('Validation errors:', errors);
       res.status(400).json({ message: 'Validation failed', errors });
     } else {
+      console.error('Other error:', error.message);
       res.status(400).json({ message: error.message });
     }
   }
