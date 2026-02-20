@@ -55,10 +55,10 @@ export default function About() {
                 </span>
               </div>
               <div className="overflow-hidden">
-                <span className="block animate-smoothSlideFade" style={{
+                <span className="block text-white animate-smoothSlideFade" style={{
                   animationDelay: '0.3s',
-                  color: '#00a67d',
-                  textShadow: '0 0 30px rgba(0, 217, 163, 0.6), 0 0 60px rgba(0, 217, 163, 0.3)'
+                  textShadow: '0 0 20px rgba(16, 185, 129, 0.6), 0 0 40px rgba(16, 185, 129, 0.4), 0 0 60px rgba(16, 185, 129, 0.2)',
+                  animation: 'smoothSlideFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s, greenTextGlow 3s ease-in-out infinite'
                 }}>
                   Global Education
                 </span>
