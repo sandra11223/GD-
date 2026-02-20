@@ -11,9 +11,15 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    // Don't send token for POST requests to courses and universities (no auth required)
+    const isCreateRequest = config.method === 'post' && 
+      (config.url === '/courses' || config.url === '/universities');
+    
+    if (!isCreateRequest) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
     return config;
   },
