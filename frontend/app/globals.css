@@ -2784,6 +2784,15 @@ nav.fixed-navbar.scroll-up {
   }
 }
 
+@keyframes greenTextGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.6), 0 0 40px rgba(16, 185, 129, 0.4), 0 0 60px rgba(16, 185, 129, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(16, 185, 129, 0.8), 0 0 60px rgba(16, 185, 129, 0.6), 0 0 90px rgba(16, 185, 129, 0.4);
+  }
+}
+
 .animate-greenGlow {
   animation: greenGlow 3s ease-in-out infinite;
 }
