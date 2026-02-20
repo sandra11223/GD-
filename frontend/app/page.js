@@ -73,13 +73,13 @@ export default function Home() {
                     </div>
                     <div className="overflow-hidden">
                       <div className="relative inline-block">
-                        <span className="block bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-500 bg-clip-text text-transparent animate-smoothSlideFade animate-shimmerWave" style={{
+                        <span className="block bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-800 bg-clip-text text-transparent animate-smoothSlideFade animate-shimmerWave" style={{
                           animationDelay: '0.2s',
                           backgroundSize: '200% auto'
                         }}>
                           Education
                         </span>
-                        <span className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-500 bg-clip-text text-transparent blur-sm opacity-50 -z-10" style={{
+                        <span className="absolute inset-0 bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-800 bg-clip-text text-transparent blur-sm opacity-50 -z-10" style={{
                           backgroundSize: '200% auto'
                         }}>
                           Education
