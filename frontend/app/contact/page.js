@@ -84,15 +84,15 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Right: Circle Images - Vertical Stack (Joined) */}
-            <div className="hidden lg:flex flex-col gap-0 items-center">
+            {/* Right: Circle Images - Vertical Stack (Joined) - Visible on all devices */}
+            <div className="flex flex-col gap-0 items-center mt-8 lg:mt-0">
               {/* Top Circle Image */}
               <div style={{
                 animation: 'spreadTopLeft 1s ease-out forwards',
                 animationDelay: '0.2s',
                 opacity: 0
               }}>
-                <div className="relative overflow-hidden rounded-full w-64 h-64 group border-4 border-emerald-500/20">
+                <div className="relative overflow-hidden rounded-full w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 group border-4 border-emerald-500/20">
                   <img 
                     src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80"
                     alt="Customer support"
@@ -103,12 +103,12 @@ export default function Contact() {
               </div>
 
               {/* Bottom Circle Image - Joined */}
-              <div className="-mt-8" style={{
+              <div className="-mt-6 sm:-mt-8" style={{
                 animation: 'spreadBottomRight 1s ease-out forwards',
                 animationDelay: '0.3s',
                 opacity: 0
               }}>
-                <div className="relative overflow-hidden rounded-full w-64 h-64 group border-4 border-emerald-500/20">
+                <div className="relative overflow-hidden rounded-full w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 group border-4 border-emerald-500/20">
                   <img 
                     src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80"
                     alt="Team meeting"

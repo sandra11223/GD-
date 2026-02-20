@@ -102,67 +102,67 @@ export default function Universities() {
               </div>
             </div>
 
-            {/* Right: Animated Image Grid - Hidden on mobile */}
-            <div className="hidden lg:grid grid-cols-2 gap-4 relative">
+            {/* Right: Animated Image Grid - Visible on all devices */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 relative mt-8 lg:mt-0">
               {/* Top Left Image - Spreads from center */}
               <div className="relative z-10" style={{
                 animation: 'spreadTopLeft 1s ease-out forwards',
                 animationDelay: '0.2s',
                 opacity: 0
               }}>
-                <div className="group overflow-hidden rounded-2xl bg-gray-800 shadow-2xl">
+                <div className="group overflow-hidden rounded-xl sm:rounded-2xl bg-gray-800 shadow-2xl">
                   <img 
                     src="https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="University campus"
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-32 sm:h-40 lg:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="eager"
                   />
                 </div>
               </div>
 
               {/* Top Right Image - Spreads from center */}
-              <div className="relative z-20 mt-8 -ml-8" style={{
+              <div className="relative z-20 mt-4 sm:mt-8 -ml-4 sm:-ml-8" style={{
                 animation: 'spreadTopRight 1s ease-out forwards',
                 animationDelay: '0.3s',
                 opacity: 0
               }}>
-                <div className="group overflow-hidden rounded-2xl bg-gray-800 shadow-2xl">
+                <div className="group overflow-hidden rounded-xl sm:rounded-2xl bg-gray-800 shadow-2xl">
                   <img 
                     src="https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="Students studying"
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-32 sm:h-40 lg:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="eager"
                   />
                 </div>
               </div>
 
               {/* Bottom Left Image - Spreads from center */}
-              <div className="relative z-30 -mt-12" style={{
+              <div className="relative z-30 -mt-6 sm:-mt-12" style={{
                 animation: 'spreadBottomLeft 1s ease-out forwards',
                 animationDelay: '0.4s',
                 opacity: 0
               }}>
-                <div className="group overflow-hidden rounded-2xl bg-gray-800 shadow-2xl">
+                <div className="group overflow-hidden rounded-xl sm:rounded-2xl bg-gray-800 shadow-2xl">
                   <img 
                     src="https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="University building"
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-32 sm:h-40 lg:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="eager"
                   />
                 </div>
               </div>
 
               {/* Bottom Right Image - Spreads from center */}
-              <div className="relative z-40 -ml-8 -mt-4" style={{
+              <div className="relative z-40 -ml-4 sm:-ml-8 -mt-2 sm:-mt-4" style={{
                 animation: 'spreadBottomRight 1s ease-out forwards',
                 animationDelay: '0.5s',
                 opacity: 0
               }}>
-                <div className="group overflow-hidden rounded-2xl bg-gray-800 shadow-2xl">
+                <div className="group overflow-hidden rounded-xl sm:rounded-2xl bg-gray-800 shadow-2xl">
                   <img 
                     src="https://images.pexels.com/photos/1370296/pexels-photo-1370296.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="University library"
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-32 sm:h-40 lg:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="eager"
                   />
                 </div>

@@ -125,15 +125,15 @@ export default function Courses() {
               </p>
             </div>
 
-            {/* Right: Circle Images - Joined Vertically - Hidden on mobile */}
-            <div className="hidden lg:flex flex-col gap-0 items-center">
+            {/* Right: Circle Images - Joined Vertically - Visible on all devices */}
+            <div className="flex flex-col gap-0 items-center mt-8 lg:mt-0">
               {/* Top Circle Image */}
               <div style={{
                 animation: 'spreadTopLeft 1s ease-out forwards',
                 animationDelay: '0.2s',
                 opacity: 0
               }}>
-                <div className="relative overflow-hidden rounded-full w-64 h-64 group border-4 border-emerald-500/20">
+                <div className="relative overflow-hidden rounded-full w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 group border-4 border-emerald-500/20">
                   <img 
                     src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80"
                     alt="Students learning"
@@ -144,12 +144,12 @@ export default function Courses() {
               </div>
 
               {/* Bottom Circle Image - Joined */}
-              <div className="-mt-8" style={{
+              <div className="-mt-6 sm:-mt-8" style={{
                 animation: 'spreadBottomRight 1s ease-out forwards',
                 animationDelay: '0.3s',
                 opacity: 0
               }}>
-                <div className="relative overflow-hidden rounded-full w-64 h-64 group border-4 border-emerald-500/20">
+                <div className="relative overflow-hidden rounded-full w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 group border-4 border-emerald-500/20">
                   <img 
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80"
                     alt="Professional training"
