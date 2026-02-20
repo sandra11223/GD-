@@ -8,8 +8,8 @@ const courseSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: false,  // Make it optional temporarily
-    default: ''
+    required: [true, 'Description is required'],
+    trim: true
   },
   duration: {
     type: String,

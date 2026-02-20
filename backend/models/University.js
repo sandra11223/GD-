@@ -12,8 +12,8 @@ const universitySchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: false,  // Make it optional temporarily
-    default: ''
+    required: [true, 'Description is required'],
+    trim: true
   },
   city: {
     type: String,
