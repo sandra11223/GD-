@@ -13,6 +13,7 @@ function DashboardContent() {
   const [inquiries, setInquiries] = useState([]);
   const [partnerships, setPartnerships] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [newsletters, setNewsletters] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +27,8 @@ function DashboardContent() {
         api.get('/enrollments'),
         api.get('/inquiries'),
         api.get('/partnerships'),
-        api.get('/courses')
+        api.get('/courses'),
+        api.get('/newsletter')
       ];
 
       const responses = await Promise.all(requests);
@@ -35,13 +37,15 @@ function DashboardContent() {
         enrollments: responses[0].data,
         inquiries: responses[1].data,
         partnerships: responses[2].data,
-        courses: responses[3].data
+        courses: responses[3].data,
+        newsletters: responses[4].data
       });
       
-      setEnrollments(responses[0].data);
-      setInquiries(responses[1].data);
-      setPartnerships(responses[2].data);
-      setCourses(responses[3].data);
+      setEnrollments(Array.isArray(responses[0].data) ? responses[0].data : []);
+      setInquiries(Array.isArray(responses[1].data) ? responses[1].data : []);
+      setPartnerships(Array.isArray(responses[2].data) ? responses[2].data : []);
+      setCourses(Array.isArray(responses[3].data) ? responses[3].data : []);
+      setNewsletters(Array.isArray(responses[4].data) ? responses[4].data : []);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -98,14 +102,14 @@ function DashboardContent() {
       )
     },
     {
-      title: 'Available Courses',
-      value: courses.length,
-      total: courses.length,
-      change: '+3%',
+      title: 'Newsletter Subscribers',
+      value: newsletters.length,
+      total: newsletters.length,
+      change: '+15%',
       trend: 'up',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       )
     }
@@ -170,12 +174,14 @@ function DashboardContent() {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-green-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
                   {stat.icon}
                 </div>
-                <div className={`flex items-center gap-1 text-sm font-semibold ${stat.trend === 'up' ? 'text-emerald-400' : 'text-red-400'}`}>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={stat.trend === 'up' ? 'M5 10l7-7m0 0l7 7m-7-7v18' : 'M19 14l-7 7m0 0l-7-7m7 7V3'} />
-                  </svg>
-                  <span>{stat.change}</span>
-                </div>
+                {stat.total > 0 && (
+                  <div className={`flex items-center gap-1 text-sm font-semibold ${stat.trend === 'up' ? 'text-emerald-400' : 'text-red-400'}`}>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={stat.trend === 'up' ? 'M5 10l7-7m0 0l7 7m-7-7v18' : 'M19 14l-7 7m0 0l-7-7m7 7V3'} />
+                    </svg>
+                    <span>{stat.change}</span>
+                  </div>
+                )}
               </div>
               
               {/* Main Number */}
@@ -333,8 +339,61 @@ function DashboardContent() {
           </div>
         </div>
 
+        {/* Newsletter Subscribers Section */}
+        <div className="data-card p-6 animate-fadeInUp mb-8" style={{ animationDelay: '600ms' }}>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-white">Newsletter Subscribers</h2>
+            <div className="flex items-center gap-2 text-emerald-400">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span className="font-semibold">{newsletters.length} Total</span>
+            </div>
+          </div>
+          
+          {newsletters.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/30">
+                <svg className="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <p className="text-gray-300 text-lg mb-2">No subscribers yet</p>
+              <p className="text-gray-400 text-sm">Subscribers will appear here when users sign up for the newsletter</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {newsletters.map((subscriber, index) => (
+                <div 
+                  key={subscriber._id} 
+                  className="info-card group"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center text-black font-bold flex-shrink-0">
+                      {subscriber.email.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-white font-semibold truncate group-hover:text-emerald-400 transition-colors">
+                        {subscriber.email}
+                      </div>
+                      <div className="text-gray-400 text-xs mt-1">
+                        Subscribed: {new Date(subscriber.createdAt).toLocaleDateString()}
+                      </div>
+                      <div className="flex items-center gap-2 mt-2">
+                        <div className="status-dot active"></div>
+                        <span className="text-emerald-400 text-xs font-semibold">Active</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         {/* Bottom Section - Progress Overview */}
-        <div className="data-card p-6 animate-fadeInUp" style={{ animationDelay: '600ms' }}>
+        <div className="data-card p-6 animate-fadeInUp" style={{ animationDelay: '700ms' }}>
           <h2 className="text-2xl font-bold text-white mb-6">Your Progress</h2>
           
           {enrollments.length === 0 && partnerships.length === 0 && inquiries.length === 0 ? (
@@ -359,52 +418,67 @@ function DashboardContent() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="chart-container">
                 <div className="text-gray-400 text-sm mb-2">Enrollment Progress</div>
-                <div className="metric-number text-3xl mb-3">
-                  {enrollments.filter(e => e.status === 'approved').length}/{enrollments.length || 0}
-                </div>
                 {enrollments.length > 0 ? (
-                  <div className="progress-bar h-3">
-                    <div 
-                      className="progress-fill"
-                      style={{ width: `${Math.min((enrollments.filter(e => e.status === 'approved').length / enrollments.length) * 100, 100)}%` }}
-                    ></div>
-                  </div>
+                  <>
+                    <div className="metric-number text-3xl mb-3">
+                      {enrollments.filter(e => e.status === 'approved').length}/{enrollments.length}
+                    </div>
+                    <div className="progress-bar h-3">
+                      <div 
+                        className="progress-fill"
+                        style={{ width: `${Math.min((enrollments.filter(e => e.status === 'approved').length / enrollments.length) * 100, 100)}%` }}
+                      ></div>
+                    </div>
+                  </>
                 ) : (
-                  <div className="text-xs text-gray-500 mt-2">No enrollments yet</div>
+                  <>
+                    <div className="metric-number text-3xl mb-3">0</div>
+                    <div className="text-xs text-gray-500 mt-2">No data available yet</div>
+                  </>
                 )}
               </div>
 
               <div className="chart-container">
                 <div className="text-gray-400 text-sm mb-2">Partnership Status</div>
-                <div className="metric-number text-3xl mb-3">
-                  {partnerships.filter(p => p.status === 'approved').length}/{partnerships.length || 0}
-                </div>
                 {partnerships.length > 0 ? (
-                  <div className="progress-bar h-3">
-                    <div 
-                      className="progress-fill"
-                      style={{ width: `${Math.min((partnerships.filter(p => p.status === 'approved').length / partnerships.length) * 100, 100)}%` }}
-                    ></div>
-                  </div>
+                  <>
+                    <div className="metric-number text-3xl mb-3">
+                      {partnerships.filter(p => p.status === 'approved').length}/{partnerships.length}
+                    </div>
+                    <div className="progress-bar h-3">
+                      <div 
+                        className="progress-fill"
+                        style={{ width: `${Math.min((partnerships.filter(p => p.status === 'approved').length / partnerships.length) * 100, 100)}%` }}
+                      ></div>
+                    </div>
+                  </>
                 ) : (
-                  <div className="text-xs text-gray-500 mt-2">No partnerships yet</div>
+                  <>
+                    <div className="metric-number text-3xl mb-3">0</div>
+                    <div className="text-xs text-gray-500 mt-2">No data available yet</div>
+                  </>
                 )}
               </div>
 
               <div className="chart-container">
                 <div className="text-gray-400 text-sm mb-2">Inquiry Resolution</div>
-                <div className="metric-number text-3xl mb-3">
-                  {inquiries.filter(i => i.status === 'resolved').length}/{inquiries.length || 0}
-                </div>
                 {inquiries.length > 0 ? (
-                  <div className="progress-bar h-3">
-                    <div 
-                      className="progress-fill"
-                      style={{ width: `${Math.min((inquiries.filter(i => i.status === 'resolved').length / inquiries.length) * 100, 100)}%` }}
-                    ></div>
-                  </div>
+                  <>
+                    <div className="metric-number text-3xl mb-3">
+                      {inquiries.filter(i => i.status === 'resolved').length}/{inquiries.length}
+                    </div>
+                    <div className="progress-bar h-3">
+                      <div 
+                        className="progress-fill"
+                        style={{ width: `${Math.min((inquiries.filter(i => i.status === 'resolved').length / inquiries.length) * 100, 100)}%` }}
+                      ></div>
+                    </div>
+                  </>
                 ) : (
-                  <div className="text-xs text-gray-500 mt-2">No inquiries yet</div>
+                  <>
+                    <div className="metric-number text-3xl mb-3">0</div>
+                    <div className="text-xs text-gray-500 mt-2">No data available yet</div>
+                  </>
                 )}
               </div>
             </div>

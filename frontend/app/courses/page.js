@@ -184,7 +184,7 @@ export default function Courses() {
                 {courses.map((course, index) => (
                   <div 
                     key={course._id} 
-                    className={`puzzle-icon-card group flex flex-col ${index % 3 === 0 ? 'card-slide-left' : index % 3 === 1 ? 'card-slide-up' : 'card-slide-right'} delay-${(index + 1) * 100}`}
+                    className={`puzzle-icon-card group h-full ${index % 3 === 0 ? 'card-slide-left' : index % 3 === 1 ? 'card-slide-up' : 'card-slide-right'} delay-${(index + 1) * 100}`}
                   >
                     {/* Course Image */}
                     <div className="relative h-48 overflow-hidden rounded-xl mb-6">
@@ -204,40 +204,38 @@ export default function Courses() {
                       </div>
                     </div>
 
-                    <div className="flex-1 flex flex-col">
-                      {/* Category */}
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="puzzle-label text-xs">
-                          {course.category}
-                        </span>
-                        <span className="text-gray-400 text-xs">{course.duration}</span>
-                      </div>
+                    {/* Category & Duration */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="puzzle-label text-xs">
+                        {course.category}
+                      </span>
+                      <span className="text-gray-400 text-xs">{course.duration}</span>
+                    </div>
 
-                      {/* Title */}
-                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
-                        {course.title}
-                      </h3>
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors min-h-[3.5rem]">
+                      {course.title}
+                    </h3>
 
-                      {/* Description */}
-                      <p className="puzzle-text text-sm mb-4 line-clamp-2 flex-1">
-                        {course.description}
-                      </p>
+                    {/* Description */}
+                    <p className="puzzle-text text-sm mb-6 line-clamp-3 min-h-[4.5rem]">
+                      {course.description}
+                    </p>
 
-                      {/* Price & CTA */}
-                      <div className="flex items-center justify-between pt-4 border-t border-emerald-500/20 mt-auto">
-                        <div>
-                          <div className="puzzle-stat-number text-2xl">
-                            ${course.price}
-                          </div>
-                          <div className="text-xs text-gray-500">per course</div>
+                    {/* Price & CTA */}
+                    <div className="flex items-center justify-between pt-4 border-t border-emerald-500/20 mt-auto">
+                      <div>
+                        <div className="puzzle-stat-number text-2xl">
+                          ${course.price}
                         </div>
-                        <Link 
-                          href="/dashboard/enroll" 
-                          className="puzzle-btn-primary px-4 py-2 text-sm"
-                        >
-                          <span>Enroll Now</span>
-                        </Link>
+                        <div className="text-xs text-gray-500">per course</div>
                       </div>
+                      <Link 
+                        href={`/dashboard/enroll?courseId=${course._id}`}
+                        className="puzzle-btn-primary px-4 py-2 text-sm whitespace-nowrap"
+                      >
+                        <span>Enroll Now</span>
+                      </Link>
                     </div>
                   </div>
                 ))}

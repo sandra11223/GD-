@@ -4,11 +4,6 @@
 
 @layer base {
   :root {
-    /* Modern Font Variables */
-    --font-heading: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
-    --font-body: var(--font-inter), 'Inter', sans-serif;
-    --font-display: var(--font-poppins), 'Poppins', sans-serif;
-    
     /* Color System - AI/Tech Theme */
     --emerald-400: #34d399;
     --emerald-500: #10b981;
@@ -32,26 +27,8 @@
 
   body {
     @apply bg-black text-white antialiased;
-    font-family: var(--font-body);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: radial-gradient(ellipse at top, #0a1f1a 0%, #000000 50%);
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  
-  .font-display {
-    font-family: var(--font-display);
-  }
-  
-  .font-heading {
-    font-family: var(--font-heading);
-  }
-  
-  .font-body {
-    font-family: var(--font-body);
   }
   
   * {
@@ -2785,27 +2762,5 @@ button, a, [role="button"] {
   100% {
     opacity: 1;
     transform: translate(0, 0) scale(1);
-  }
-}
-
-@keyframes spreadScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes spreadLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(50%) scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0) scale(1);
   }
 }

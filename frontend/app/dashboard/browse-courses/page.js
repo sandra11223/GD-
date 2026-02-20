@@ -3,161 +3,157 @@
 import { useState } from 'react';
 import ProtectedRoute from '../../../components/ProtectedRoute';
 import DashboardLayout from '../../../components/DashboardLayout';
-import { useAuth } from '../../../context/AuthContext';
 import api from '../../../services/api';
 import { toast } from 'react-toastify';
 
 function BrowseCoursesContent() {
-  const { user } = useAuth();
   const [formData, setFormData] = useState({
-    institutionName: user?.companyName || '',
-    contactPerson: user?.name || '',
-    email: user?.email || '',
-    phone: '',
-    courseCategory: ''
+    title: '',
+    duration: '',
+    level: 'Beginner',
+    category: '',
+    price: ''
   });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('/inquiries', {
-        name: formData.contactPerson,
-        email: formData.email,
-        phone: formData.phone,
-        subject: `Course Inquiry - ${formData.courseCategory}`,
-        message: `
-Institution: ${formData.institutionName}
-Contact Person: ${formData.contactPerson}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Course Category: ${formData.courseCategory}
-        `
-      });
-      toast.success('Course inquiry submitted successfully!');
+      await api.post('/courses', formData);
+      toast.success('Course submitted successfully! It will appear on the public courses page.');
       setFormData({
-        institutionName: user?.companyName || '',
-        contactPerson: user?.name || '',
-        email: user?.email || '',
-        phone: '',
-        courseCategory: ''
+        title: '',
+        duration: '',
+        level: 'Beginner',
+        category: '',
+        price: ''
       });
     } catch (error) {
-      console.error('Error submitting inquiry:', error);
-      toast.error(error.response?.data?.message || 'Failed to submit inquiry');
+      toast.error(error.response?.data?.message || 'Failed to submit course');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2 gradient-text-emerald">Browse Courses</h1>
-        <p className="text-gray-300 text-lg">Submit your course requirements and we'll help you find the perfect match</p>
+        <h1 className="text-4xl font-bold mb-2 gradient-text-emerald">Submit Course Details</h1>
+        <p className="text-gray-300 text-lg">Add a new course that will appear on the public courses page</p>
       </div>
 
-      <div className="glass-dark rounded-xl border border-emerald-500/20 shadow-emerald-glow p-8">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
+      <div className="max-w-3xl">
+        <div className="glass-dark rounded-xl border border-emerald-500/20 shadow-emerald-glow p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Institution Name
+              <label className="block text-sm font-semibold text-white mb-2">
+                Course Title <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
-                name="institutionName"
-                value={formData.institutionName}
+                name="title"
+                value={formData.title}
                 onChange={handleChange}
                 required
-                className="input-field"
-                placeholder="Your institution name"
+                placeholder="e.g., Business Management & Leadership"
+                className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Contact Person
-              </label>
-              <input
-                type="text"
-                name="contactPerson"
-                value={formData.contactPerson}
-                onChange={handleChange}
-                required
-                className="input-field"
-                placeholder="Your name"
-              />
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Duration <span className="text-red-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="duration"
+                  value={formData.duration}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g., 12 weeks"
+                  className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Level <span className="text-red-400">*</span>
+                </label>
+                <select
+                  name="level"
+                  value={formData.level}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
+                >
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="input-field"
-                placeholder="your@email.com"
-              />
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Category <span className="text-red-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g., Business, Technology, Marketing"
+                  className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Price (USD) <span className="text-red-400">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  required
+                  min="0"
+                  placeholder="e.g., 2500"
+                  className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
+                />
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="input-field"
-                placeholder="+1 (555) 000-0000"
-              />
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-lg py-4"
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Submitting...
+                  </span>
+                ) : (
+                  'Submit Course'
+                )}
+              </button>
             </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-300 mb-2">
-              Course Category
-            </label>
-            <select
-              name="courseCategory"
-              value={formData.courseCategory}
-              onChange={handleChange}
-              required
-              className="input-field"
-            >
-              <option value="">Select a category</option>
-              <option value="Business">Business & Management</option>
-              <option value="Technology">Technology & IT</option>
-              <option value="Marketing">Marketing & Sales</option>
-              <option value="Finance">Finance & Accounting</option>
-              <option value="Healthcare">Healthcare & Medicine</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn-primary w-full"
-          >
-            {loading ? 'Submitting...' : 'Submit Course Inquiry'}
-          </button>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

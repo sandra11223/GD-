@@ -10,7 +10,6 @@ export default function Register() {
     email: '',
     password: '',
     confirmPassword: '',
-    companyName: '',
     phone: ''
   });
   const [loading, setLoading] = useState(false);
@@ -108,20 +107,6 @@ export default function Register() {
                 required
                 className="input-field"
                 placeholder="your@email.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Company Name <span className="text-gray-500 font-normal">(Optional)</span>
-              </label>
-              <input
-                type="text"
-                name="companyName"
-                value={formData.companyName}
-                onChange={handleChange}
-                className="input-field"
-                placeholder="Your Company"
               />
             </div>
 

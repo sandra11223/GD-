@@ -1,6 +1,6 @@
 'use client';
 
-import { Inter } from 'next/font/google';
+import { Inter, Poppins, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import '../styles/animations.css';
 import '../styles/fintech-animations.css';
@@ -14,7 +14,25 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { initScrollReveal, initNavbarScroll } from '../lib/animations';
 
-const inter = Inter({ subsets: ['latin'] });
+// Modern font combinations
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const poppins = Poppins({ 
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+});
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -91,7 +109,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} overflow-x-hidden`}>
+      <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} font-sans overflow-x-hidden`}>
         <AuthProvider>
           {!isDashboardOrAdmin && <Navbar />}
           <main className="min-h-screen-mobile">{children}</main>

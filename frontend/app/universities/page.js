@@ -188,9 +188,9 @@ export default function Universities() {
               </div>
             </div>
           ) : (
-            <div className="puzzle-feature-grid">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {universities.map((university, index) => (
-                <div key={university._id} className={`puzzle-icon-card group flex flex-col ${index % 2 === 0 ? 'card-slide-left' : 'card-slide-right'} delay-${(index + 1) * 100}`}>
+                <div key={university._id} className={`puzzle-icon-card group h-full ${index % 2 === 0 ? 'card-slide-left' : 'card-slide-right'} delay-${(index + 1) * 100}`}>
                   {/* University Image */}
                   {university.image && (
                     <div className="relative h-40 sm:h-48 overflow-hidden rounded-xl mb-4 sm:mb-6">
@@ -221,12 +221,12 @@ export default function Universities() {
                   </div>
 
                   {/* University Name */}
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-emerald-400 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-emerald-400 transition-colors min-h-[3.5rem]">
                     {university.name}
                   </h3>
 
                   {/* Description */}
-                  <p className="puzzle-text text-xs sm:text-sm mb-3 sm:mb-4 flex-1 line-clamp-3">
+                  <p className="puzzle-text text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3 min-h-[4.5rem]">
                     {university.description}
                   </p>
 

@@ -3,189 +3,185 @@
 import { useState } from 'react';
 import ProtectedRoute from '../../../components/ProtectedRoute';
 import DashboardLayout from '../../../components/DashboardLayout';
-import { useAuth } from '../../../context/AuthContext';
 import api from '../../../services/api';
 import { toast } from 'react-toastify';
 
 function UniversitiesContent() {
-  const { user } = useAuth();
   const [formData, setFormData] = useState({
-    institutionName: user?.companyName || '',
-    contactPerson: user?.name || '',
-    email: user?.email || '',
-    phone: '',
-    preferredCountry: '',
-    fieldOfStudy: ''
+    name: '',
+    country: '',
+    city: '',
+    ranking: '',
+    website: '',
+    programs: '',
+    students: ''
   });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('/inquiries', {
-        name: formData.contactPerson,
-        email: formData.email,
-        phone: formData.phone,
-        subject: `University Partnership Inquiry - ${formData.preferredCountry}`,
-        message: `
-Institution: ${formData.institutionName}
-Contact Person: ${formData.contactPerson}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Preferred Country: ${formData.preferredCountry}
-Field of Study: ${formData.fieldOfStudy}
-        `
-      });
-      toast.success('University inquiry submitted successfully!');
+      await api.post('/universities', formData);
+      toast.success('University submitted successfully! It will appear on the public universities page.');
       setFormData({
-        institutionName: user?.companyName || '',
-        contactPerson: user?.name || '',
-        email: user?.email || '',
-        phone: '',
-        preferredCountry: '',
-        fieldOfStudy: ''
+        name: '',
+        country: '',
+        city: '',
+        ranking: '',
+        website: '',
+        programs: '',
+        students: ''
       });
     } catch (error) {
-      console.error('Error submitting inquiry:', error);
-      toast.error(error.response?.data?.message || 'Failed to submit inquiry');
+      toast.error(error.response?.data?.message || 'Failed to submit university');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2 gradient-text-emerald">University Partnerships</h1>
-        <p className="text-gray-300 text-lg">Connect with top universities worldwide for your students</p>
+        <h1 className="text-4xl font-bold mb-2 gradient-text-emerald">Submit University Details</h1>
+        <p className="text-gray-300 text-lg">Add a new university that will appear on the public universities page</p>
       </div>
 
-      <div className="glass-dark rounded-xl border border-emerald-500/20 shadow-emerald-glow p-8">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
+      <div className="max-w-3xl">
+        <div className="glass-dark rounded-xl border border-emerald-500/20 shadow-emerald-glow p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Institution Name
+              <label className="block text-sm font-semibold text-white mb-2">
+                University Name <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
-                name="institutionName"
-                value={formData.institutionName}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
                 required
-                className="input-field"
-                placeholder="Your institution name"
+                placeholder="e.g., Harvard University"
+                className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
               />
             </div>
 
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Country <span className="text-red-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g., United States"
+                  className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  City <span className="text-red-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g., Cambridge, MA"
+                  className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Ranking
+                </label>
+                <input
+                  type="text"
+                  name="ranking"
+                  value={formData.ranking}
+                  onChange={handleChange}
+                  placeholder="e.g., Top 1, #5 Globally"
+                  className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Website
+                </label>
+                <input
+                  type="url"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  placeholder="https://www.university.edu"
+                  className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
+                />
+              </div>
+            </div>
+
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Contact Person
+              <label className="block text-sm font-semibold text-white mb-2">
+                Programs Offered
               </label>
               <input
                 type="text"
-                name="contactPerson"
-                value={formData.contactPerson}
+                name="programs"
+                value={formData.programs}
                 onChange={handleChange}
-                required
-                className="input-field"
-                placeholder="Your name"
+                placeholder="e.g., Business Administration, Law, Medicine, Engineering"
+                className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
               />
+              <p className="text-xs text-gray-400 mt-1">Separate multiple programs with commas</p>
             </div>
-          </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Email Address
+              <label className="block text-sm font-semibold text-white mb-2">
+                Number of Students
               </label>
               <input
-                type="email"
-                name="email"
-                value={formData.email}
+                type="text"
+                name="students"
+                value={formData.students}
                 onChange={handleChange}
-                required
-                className="input-field"
-                placeholder="your@email.com"
+                placeholder="e.g., 20,000+ Students"
+                className="w-full px-4 py-3 bg-gray-900/70 border-2 border-emerald-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 transition-all"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="input-field"
-                placeholder="+1 (555) 000-0000"
-              />
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Preferred Country
-              </label>
-              <select
-                name="preferredCountry"
-                value={formData.preferredCountry}
-                onChange={handleChange}
-                required
-                className="input-field"
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-lg py-4"
               >
-                <option value="">Select a country</option>
-                <option value="United States">United States</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Canada">Canada</option>
-                <option value="Australia">Australia</option>
-                <option value="Germany">Germany</option>
-                <option value="Singapore">Singapore</option>
-                <option value="Other">Other</option>
-              </select>
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Submitting...
+                  </span>
+                ) : (
+                  'Submit University'
+                )}
+              </button>
             </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Field of Study
-              </label>
-              <select
-                name="fieldOfStudy"
-                value={formData.fieldOfStudy}
-                onChange={handleChange}
-                required
-                className="input-field"
-              >
-                <option value="">Select field of study</option>
-                <option value="Business & Management">Business & Management</option>
-                <option value="Engineering">Engineering</option>
-                <option value="Computer Science">Computer Science</option>
-                <option value="Medicine & Healthcare">Medicine & Healthcare</option>
-                <option value="Law">Law</option>
-                <option value="Arts & Humanities">Arts & Humanities</option>
-                <option value="Sciences">Sciences</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn-primary w-full"
-          >
-            {loading ? 'Submitting...' : 'Submit University Inquiry'}
-          </button>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(data));
       setUser(data);
       toast.success('Login successful!');
-      router.push('/admin');
+      router.push('/');
       return data;
     } catch (error) {
       console.error('Login error:', error);
