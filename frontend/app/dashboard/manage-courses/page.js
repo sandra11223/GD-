@@ -37,13 +37,18 @@ export default function ManageCourses() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('Submitting course data:', formData);
+      // Convert price to number
+      const courseData = {
+        ...formData,
+        price: Number(formData.price)
+      };
+      console.log('Submitting course data:', courseData);
       if (editingCourse) {
-        const response = await api.put(`/courses/${editingCourse._id}`, formData);
+        const response = await api.put(`/courses/${editingCourse._id}`, courseData);
         console.log('Update response:', response.data);
         alert('Course updated successfully!');
       } else {
-        const response = await api.post('/courses', formData);
+        const response = await api.post('/courses', courseData);
         console.log('Create response:', response.data);
         alert('Course created successfully!');
       }
