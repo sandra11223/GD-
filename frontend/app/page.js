@@ -150,10 +150,10 @@ export default function Home() {
         </section>
 
         {/* Services Section */}
-        <section className="py-20 bg-black relative">
+        <section className="py-12 md:py-20 bg-black relative">
           <div className="container mx-auto px-6 lg:px-12">
             {/* Section Header */}
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-16">
               <div className="text-xs font-medium text-emerald-400 tracking-wide uppercase mb-4">What We Offer</div>
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
                 Our Services
@@ -164,7 +164,7 @@ export default function Home() {
             </div>
             
             {/* Services Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
                 { 
                   icon: '🌍', 
@@ -213,7 +213,7 @@ export default function Home() {
         </section>
 
         {/* Featured Solutions */}
-        <section className="py-20 bg-gradient-to-b from-black to-gray-950 relative">
+        <section className="py-12 md:py-20 bg-gradient-to-b from-black to-gray-950 relative">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="max-w-2xl mb-12">
               <div className="text-xs font-medium text-emerald-400 tracking-wide uppercase mb-4">Featured Solutions</div>
@@ -222,7 +222,7 @@ export default function Home() {
               </h2>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-4 md:gap-6">
               {[
                 {
                   img: 'photo-1488190211105-8b0e65b80b4e',
@@ -366,7 +366,7 @@ export default function Home() {
         </section>
 
         {/* Why Choose Us */}
-        <section className="py-20 bg-black relative">
+        <section className="py-12 md:py-20 bg-black relative">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="max-w-2xl mb-12">
               <div className="text-xs font-medium text-emerald-400 tracking-wide uppercase mb-4">Why Choose Us</div>
@@ -375,7 +375,7 @@ export default function Home() {
               </h2>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-4 md:gap-6">
               {[
                 { number: '86%', title: 'Lower Fees', desc: 'Cost savings on partnerships', icon: '💰' },
                 { number: '24/7', title: 'Support', desc: 'Round-the-clock assistance', icon: '🛟' },
@@ -393,7 +393,7 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-b from-black to-gray-950 relative">
+        <section className="py-12 md:py-20 bg-gradient-to-b from-black to-gray-950 relative">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
