@@ -5,7 +5,74 @@ import Link from 'next/link';
 import api from '../../services/api';
 
 // Demo universities data
-const demoUniversities = [];
+const demoUniversities = [
+  {
+    _id: 'demo-1',
+    name: 'Stanford University',
+    country: 'United States',
+    description: 'World-renowned research university known for innovation, entrepreneurship, and academic excellence.',
+    ranking: 'Top 5 Global',
+    programs: '200+ Programs',
+    students: '17,000+',
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=600&q=80',
+    website: 'https://www.stanford.edu'
+  },
+  {
+    _id: 'demo-2',
+    name: 'University of Oxford',
+    country: 'United Kingdom',
+    description: 'Historic institution offering world-class education across humanities, sciences, and professional studies.',
+    ranking: 'Top 3 Global',
+    programs: '350+ Programs',
+    students: '24,000+',
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80',
+    website: 'https://www.ox.ac.uk'
+  },
+  {
+    _id: 'demo-3',
+    name: 'National University of Singapore',
+    country: 'Singapore',
+    description: 'Leading global university in Asia with strong research focus and industry partnerships.',
+    ranking: 'Top 15 Global',
+    programs: '150+ Programs',
+    students: '40,000+',
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80',
+    website: 'https://www.nus.edu.sg'
+  },
+  {
+    _id: 'demo-4',
+    name: 'University of Toronto',
+    country: 'Canada',
+    description: 'Canada\'s top university offering diverse programs with emphasis on research and innovation.',
+    ranking: 'Top 20 Global',
+    programs: '700+ Programs',
+    students: '95,000+',
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=600&q=80',
+    website: 'https://www.utoronto.ca'
+  },
+  {
+    _id: 'demo-5',
+    name: 'ETH Zurich',
+    country: 'Switzerland',
+    description: 'Premier science and technology university known for cutting-edge research and innovation.',
+    ranking: 'Top 10 Global',
+    programs: '100+ Programs',
+    students: '23,000+',
+    image: 'https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=600&q=80',
+    website: 'https://ethz.ch'
+  },
+  {
+    _id: 'demo-6',
+    name: 'University of Melbourne',
+    country: 'Australia',
+    description: 'Australia\'s leading university with comprehensive programs and strong international reputation.',
+    ranking: 'Top 40 Global',
+    programs: '300+ Programs',
+    students: '50,000+',
+    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80',
+    website: 'https://www.unimelb.edu.au'
+  }
+];
 
 export default function Universities() {
   const [universities, setUniversities] = useState([]);

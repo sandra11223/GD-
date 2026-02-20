@@ -5,7 +5,62 @@ import api from '../../services/api';
 import Link from 'next/link';
 
 // Demo courses data
-const demoCourses = [];
+const demoCourses = [
+  {
+    _id: 'demo-1',
+    title: 'Digital Marketing Fundamentals',
+    description: 'Master the essentials of digital marketing including SEO, social media, content marketing, and analytics.',
+    category: 'Marketing',
+    level: 'Beginner',
+    duration: '8 weeks',
+    price: 299
+  },
+  {
+    _id: 'demo-2',
+    title: 'Data Science & Analytics',
+    description: 'Learn data analysis, visualization, and machine learning techniques using Python and industry tools.',
+    category: 'Technology',
+    level: 'Intermediate',
+    duration: '12 weeks',
+    price: 499
+  },
+  {
+    _id: 'demo-3',
+    title: 'Project Management Professional',
+    description: 'Comprehensive PMP certification preparation with real-world project management scenarios.',
+    category: 'Management',
+    level: 'Advanced',
+    duration: '10 weeks',
+    price: 399
+  },
+  {
+    _id: 'demo-4',
+    title: 'Web Development Bootcamp',
+    description: 'Full-stack web development covering HTML, CSS, JavaScript, React, Node.js, and databases.',
+    category: 'Technology',
+    level: 'Beginner',
+    duration: '16 weeks',
+    price: 599
+  },
+  {
+    _id: 'demo-5',
+    title: 'Business Analytics',
+    description: 'Transform data into actionable insights with Excel, SQL, Tableau, and business intelligence tools.',
+    category: 'Business',
+    level: 'Intermediate',
+    duration: '10 weeks',
+    price: 449
+  },
+  {
+    _id: 'demo-6',
+    title: 'Cloud Computing Essentials',
+    description: 'Master AWS, Azure, and Google Cloud platforms with hands-on labs and certification prep.',
+    category: 'Technology',
+    level: 'Intermediate',
+    duration: '8 weeks',
+    price: 399
+  }
+];
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
