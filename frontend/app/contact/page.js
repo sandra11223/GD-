@@ -140,45 +140,53 @@ export default function Contact() {
                   <p className="text-sm sm:text-base font-bold text-white">Connect</p>
                 </div>
 
-                {/* Curved Arrows - Clockwise Workflow */}
-                {/* Top to Right */}
-                <svg className="absolute top-[25%] right-[25%] w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-gold-400/50 animate-pulse" style={{animationDelay: '0.3s'}}>
-                  <path d="M 5 5 Q 40 5 55 40" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" markerEnd="url(#contactArrow1)"/>
+                {/* Workflow Arrows - Clockwise: Call → Email → Schedule → Chat → Connect */}
+                {/* Call (Top) to Email (Right) */}
+                <svg className="absolute top-[15%] right-[20%] w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 text-gold-400/60 pointer-events-none" style={{animationDelay: '0.3s'}}>
                   <defs>
-                    <marker id="contactArrow1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-                      <polygon points="0 0, 10 3, 0 6" fill="currentColor" />
+                    <marker id="arrowCallEmail" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                      <polygon points="0 0, 8 3, 0 6" fill="currentColor" />
                     </marker>
                   </defs>
+                  <path d="M 10 15 Q 50 10, 80 45" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#arrowCallEmail)" className="animate-pulse"/>
                 </svg>
 
-                {/* Right to Bottom */}
-                <svg className="absolute bottom-[25%] right-[25%] w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-gold-400/50 animate-pulse" style={{animationDelay: '0.6s'}}>
-                  <path d="M 55 5 Q 40 40 5 55" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" markerEnd="url(#contactArrow2)"/>
+                {/* Email (Right) to Schedule (Bottom) */}
+                <svg className="absolute bottom-[20%] right-[15%] w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 text-gold-400/60 pointer-events-none" style={{animationDelay: '0.6s'}}>
                   <defs>
-                    <marker id="contactArrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-                      <polygon points="0 0, 10 3, 0 6" fill="currentColor" />
+                    <marker id="arrowEmailSchedule" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                      <polygon points="0 0, 8 3, 0 6" fill="currentColor" />
                     </marker>
                   </defs>
+                  <path d="M 80 10 Q 50 50, 15 80" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#arrowEmailSchedule)" className="animate-pulse"/>
                 </svg>
 
-                {/* Bottom to Left */}
-                <svg className="absolute bottom-[25%] left-[25%] w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-gold-400/50 animate-pulse" style={{animationDelay: '0.9s'}}>
-                  <path d="M 55 55 Q 5 40 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" markerEnd="url(#contactArrow3)"/>
+                {/* Schedule (Bottom) to Chat (Left) */}
+                <svg className="absolute bottom-[15%] left-[20%] w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 text-gold-400/60 pointer-events-none" style={{animationDelay: '0.9s'}}>
                   <defs>
-                    <marker id="contactArrow3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-                      <polygon points="0 0, 10 3, 0 6" fill="currentColor" />
+                    <marker id="arrowScheduleChat" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                      <polygon points="0 0, 8 3, 0 6" fill="currentColor" />
                     </marker>
                   </defs>
+                  <path d="M 80 80 Q 40 50, 10 15" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#arrowScheduleChat)" className="animate-pulse"/>
                 </svg>
 
-                {/* Left to Top */}
-                <svg className="absolute top-[25%] left-[25%] w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-gold-400/50 animate-pulse" style={{animationDelay: '1.2s'}}>
-                  <path d="M 5 55 Q 5 5 40 5" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" markerEnd="url(#contactArrow4)"/>
+                {/* Chat (Left) to Call (Top) */}
+                <svg className="absolute top-[20%] left-[15%] w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 text-gold-400/60 pointer-events-none" style={{animationDelay: '1.2s'}}>
                   <defs>
-                    <marker id="contactArrow4" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-                      <polygon points="0 0, 10 3, 0 6" fill="currentColor" />
+                    <marker id="arrowChatCall" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                      <polygon points="0 0, 8 3, 0 6" fill="currentColor" />
                     </marker>
                   </defs>
+                  <path d="M 10 80 Q 10 40, 45 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#arrowChatCall)" className="animate-pulse"/>
+                </svg>
+
+                {/* Connecting lines to center Connect circle */}
+                <svg className="absolute inset-0 w-full h-full text-gold-400/30 pointer-events-none">
+                  <line x1="50%" y1="20%" x2="50%" y2="40%" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" className="animate-pulse" style={{animationDelay: '0.2s'}}/>
+                  <line x1="80%" y1="50%" x2="60%" y2="50%" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" className="animate-pulse" style={{animationDelay: '0.5s'}}/>
+                  <line x1="50%" y1="80%" x2="50%" y2="60%" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" className="animate-pulse" style={{animationDelay: '0.8s'}}/>
+                  <line x1="20%" y1="50%" x2="40%" y2="50%" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" className="animate-pulse" style={{animationDelay: '1.1s'}}/>
                 </svg>
 
                 {/* Decorative Glowing Orbs */}
