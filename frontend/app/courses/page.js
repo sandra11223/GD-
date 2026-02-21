@@ -164,8 +164,8 @@ export default function Courses() {
                   <p className="text-[10px] sm:text-xs font-bold text-white">Master</p>
                 </div>
 
-                {/* Center Circle - Main (Small) */}
-                <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/60 to-gold-600/40 backdrop-blur-md border-3 border-gold-400/70 rounded-full flex flex-col items-center justify-center text-center shadow-2xl shadow-gold-400/50 z-20 relative">
+                {/* Center Circle - Main (Small & Centered) */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/60 to-gold-600/40 backdrop-blur-md border-3 border-gold-400/70 rounded-full flex flex-col items-center justify-center text-center shadow-2xl shadow-gold-400/50 z-20 relative">
                   {/* Pulsing ring effect */}
                   <div className="absolute inset-0 rounded-full border-2 border-gold-400/50 animate-ping"></div>
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold-400/20 to-transparent animate-pulse-slow"></div>
@@ -225,13 +225,13 @@ export default function Courses() {
                     </marker>
                   </defs>
                   {/* Top to Center */}
-                  <line x1="50%" y1="20%" x2="50%" y2="38%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterCourse)" className="animate-pulse" style={{animationDelay: '0.2s'}}/>
+                  <line x1="50%" y1="20%" x2="50%" y2="45%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterCourse)" className="animate-pulse" style={{animationDelay: '0.2s'}}/>
                   {/* Right to Center */}
-                  <line x1="80%" y1="50%" x2="62%" y2="50%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterCourse)" className="animate-pulse" style={{animationDelay: '0.5s'}}/>
+                  <line x1="80%" y1="50%" x2="55%" y2="50%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterCourse)" className="animate-pulse" style={{animationDelay: '0.5s'}}/>
                   {/* Bottom to Center */}
-                  <line x1="50%" y1="80%" x2="50%" y2="62%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterCourse)" className="animate-pulse" style={{animationDelay: '0.8s'}}/>
+                  <line x1="50%" y1="80%" x2="50%" y2="55%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterCourse)" className="animate-pulse" style={{animationDelay: '0.8s'}}/>
                   {/* Left to Center */}
-                  <line x1="20%" y1="50%" x2="38%" y2="50%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterCourse)" className="animate-pulse" style={{animationDelay: '1.1s'}}/>
+                  <line x1="20%" y1="50%" x2="45%" y2="50%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterCourse)" className="animate-pulse" style={{animationDelay: '1.1s'}}/>
                 </svg>
 
                 {/* Decorative Glowing Orbs */}
