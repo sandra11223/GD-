@@ -132,16 +132,16 @@ export default function Contact() {
                   <p className="text-[10px] sm:text-xs font-bold text-white">Chat</p>
                 </div>
 
-                {/* Center Circle - Main (Larger & More Prominent) */}
-                <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40 bg-gradient-to-br from-gold-500/60 to-gold-600/40 backdrop-blur-md border-4 border-gold-400/70 rounded-full flex flex-col items-center justify-center text-center shadow-2xl shadow-gold-400/50 z-20 relative">
+                {/* Center Circle - Main (Smaller but Prominent) */}
+                <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-br from-gold-500/60 to-gold-600/40 backdrop-blur-md border-3 border-gold-400/70 rounded-full flex flex-col items-center justify-center text-center shadow-2xl shadow-gold-400/50 z-20 relative">
                   {/* Pulsing ring effect */}
                   <div className="absolute inset-0 rounded-full border-2 border-gold-400/50 animate-ping"></div>
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold-400/20 to-transparent animate-pulse-slow"></div>
                   
-                  <svg className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 text-gold-400 mb-1 relative z-10 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-gold-400 mb-1 relative z-10 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
-                  <p className="text-base sm:text-lg font-black text-white relative z-10 tracking-wide">CONNECT</p>
+                  <p className="text-xs sm:text-sm font-black text-white relative z-10 tracking-wide">CONNECT</p>
                 </div>
 
                 {/* Workflow Arrows - Clockwise: Call → Email → Schedule → Chat → Connect */}
