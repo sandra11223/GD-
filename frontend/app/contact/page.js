@@ -100,107 +100,49 @@ export default function Contact() {
                 opacity: 0,
                 transform: 'scale(0.2)'
               }}>
-                {/* Top Circle - Aligned with arrow at 20% */}
-                <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/30 to-gold-600/20 backdrop-blur-sm border-2 border-gold-400/40 rounded-full flex flex-col items-center justify-center text-center animate-float shadow-lg shadow-gold-400/20">
+                {/* Top Circle */}
+                <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/30 to-gold-600/20 backdrop-blur-sm border-2 border-gold-400/40 rounded-full flex flex-col items-center justify-center text-center animate-float shadow-lg shadow-gold-400/20">
                   <svg className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-gold-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   <p className="text-[10px] sm:text-xs font-bold text-white">Call</p>
                 </div>
 
-                {/* Right Circle - Aligned with arrow at 80% */}
-                <div className="absolute right-[20%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/30 to-gold-600/20 backdrop-blur-sm border-2 border-gold-400/40 rounded-full flex flex-col items-center justify-center text-center animate-float shadow-lg shadow-gold-400/20" style={{animationDelay: '0.5s'}}>
+                {/* Right Circle */}
+                <div className="absolute right-[10%] top-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/30 to-gold-600/20 backdrop-blur-sm border-2 border-gold-400/40 rounded-full flex flex-col items-center justify-center text-center animate-float shadow-lg shadow-gold-400/20" style={{animationDelay: '0.5s'}}>
                   <svg className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-gold-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                   <p className="text-[10px] sm:text-xs font-bold text-white">Email</p>
                 </div>
 
-                {/* Bottom Circle - Aligned with arrow at 80% */}
-                <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/30 to-gold-600/20 backdrop-blur-sm border-2 border-gold-400/40 rounded-full flex flex-col items-center justify-center text-center animate-float shadow-lg shadow-gold-400/20" style={{animationDelay: '1s'}}>
+                {/* Bottom Circle */}
+                <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/30 to-gold-600/20 backdrop-blur-sm border-2 border-gold-400/40 rounded-full flex flex-col items-center justify-center text-center animate-float shadow-lg shadow-gold-400/20" style={{animationDelay: '1s'}}>
                   <svg className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-gold-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <p className="text-[10px] sm:text-xs font-bold text-white">Schedule</p>
                 </div>
 
-                {/* Left Circle - Aligned with arrow at 20% */}
-                <div className="absolute left-[20%] top-1/2 translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/30 to-gold-600/20 backdrop-blur-sm border-2 border-gold-400/40 rounded-full flex flex-col items-center justify-center text-center animate-float shadow-lg shadow-gold-400/20" style={{animationDelay: '1.5s'}}>
+                {/* Left Circle */}
+                <div className="absolute left-[10%] top-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/30 to-gold-600/20 backdrop-blur-sm border-2 border-gold-400/40 rounded-full flex flex-col items-center justify-center text-center animate-float shadow-lg shadow-gold-400/20" style={{animationDelay: '1.5s'}}>
                   <svg className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-gold-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
                   </svg>
                   <p className="text-[10px] sm:text-xs font-bold text-white">Chat</p>
                 </div>
 
-                {/* Center Circle - Main (Small & Centered) */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-br from-gold-500/60 to-gold-600/40 backdrop-blur-md border-3 border-gold-400/70 rounded-full flex flex-col items-center justify-center text-center shadow-2xl shadow-gold-400/50 z-20 relative">
+                {/* Center Circle - Main */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-32 sm:h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-gold-500/60 to-gold-600/40 backdrop-blur-md border-4 border-gold-400/70 rounded-full flex flex-col items-center justify-center text-center shadow-2xl shadow-gold-400/50 z-20 relative">
                   {/* Pulsing ring effect */}
                   <div className="absolute inset-0 rounded-full border-2 border-gold-400/50 animate-ping"></div>
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold-400/20 to-transparent animate-pulse-slow"></div>
                   
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-gold-400 mb-0.5 relative z-10 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 text-gold-400 mb-1 relative z-10 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
-                  <p className="text-[10px] sm:text-xs font-black text-white relative z-10 tracking-wide">CONNECT</p>
+                  <p className="text-xs sm:text-sm font-black text-white relative z-10 tracking-wide uppercase">CONNECT</p>
                 </div>
-
-                {/* Workflow Arrows - Clockwise: Call → Email → Schedule → Chat → Connect */}
-                {/* Call (Top) to Email (Right) */}
-                <svg className="absolute top-[15%] right-[20%] w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 text-gold-400/60 pointer-events-none" style={{animationDelay: '0.3s'}}>
-                  <defs>
-                    <marker id="arrowCallEmail" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
-                      <polygon points="0 0, 8 3, 0 6" fill="currentColor" />
-                    </marker>
-                  </defs>
-                  <path d="M 10 15 Q 50 10, 80 45" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#arrowCallEmail)" className="animate-pulse"/>
-                </svg>
-
-                {/* Email (Right) to Schedule (Bottom) */}
-                <svg className="absolute bottom-[20%] right-[15%] w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 text-gold-400/60 pointer-events-none" style={{animationDelay: '0.6s'}}>
-                  <defs>
-                    <marker id="arrowEmailSchedule" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
-                      <polygon points="0 0, 8 3, 0 6" fill="currentColor" />
-                    </marker>
-                  </defs>
-                  <path d="M 80 10 Q 50 50, 15 80" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#arrowEmailSchedule)" className="animate-pulse"/>
-                </svg>
-
-                {/* Schedule (Bottom) to Chat (Left) */}
-                <svg className="absolute bottom-[15%] left-[20%] w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 text-gold-400/60 pointer-events-none" style={{animationDelay: '0.9s'}}>
-                  <defs>
-                    <marker id="arrowScheduleChat" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
-                      <polygon points="0 0, 8 3, 0 6" fill="currentColor" />
-                    </marker>
-                  </defs>
-                  <path d="M 80 80 Q 40 50, 10 15" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#arrowScheduleChat)" className="animate-pulse"/>
-                </svg>
-
-                {/* Chat (Left) to Call (Top) */}
-                <svg className="absolute top-[20%] left-[15%] w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 text-gold-400/60 pointer-events-none" style={{animationDelay: '1.2s'}}>
-                  <defs>
-                    <marker id="arrowChatCall" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
-                      <polygon points="0 0, 8 3, 0 6" fill="currentColor" />
-                    </marker>
-                  </defs>
-                  <path d="M 10 80 Q 10 40, 45 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" markerEnd="url(#arrowChatCall)" className="animate-pulse"/>
-                </svg>
-
-                {/* Focused Arrows pointing to center CONNECT circle */}
-                <svg className="absolute inset-0 w-full h-full text-gold-400/70 pointer-events-none z-10">
-                  <defs>
-                    <marker id="arrowToCenterContact" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                      <polygon points="0 0, 10 3, 0 6" fill="currentColor" />
-                    </marker>
-                  </defs>
-                  {/* Top to Center */}
-                  <line x1="50%" y1="20%" x2="50%" y2="45%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterContact)" className="animate-pulse" style={{animationDelay: '0.2s'}}/>
-                  {/* Right to Center */}
-                  <line x1="80%" y1="50%" x2="55%" y2="50%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterContact)" className="animate-pulse" style={{animationDelay: '0.5s'}}/>
-                  {/* Bottom to Center */}
-                  <line x1="50%" y1="80%" x2="50%" y2="55%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterContact)" className="animate-pulse" style={{animationDelay: '0.8s'}}/>
-                  {/* Left to Center */}
-                  <line x1="20%" y1="50%" x2="45%" y2="50%" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" markerEnd="url(#arrowToCenterContact)" className="animate-pulse" style={{animationDelay: '1.1s'}}/>
-                </svg>
 
                 {/* Decorative Glowing Orbs */}
                 <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-24 h-24 sm:w-32 sm:h-32 bg-gold-400/20 rounded-full blur-3xl animate-pulse-slow"></div>
