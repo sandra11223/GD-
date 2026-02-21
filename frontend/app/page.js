@@ -426,7 +426,7 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   ),
-                  image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80'
+                  image: 'https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=600&q=80'
                 },
                 { 
                   title: 'Support', 
@@ -436,7 +436,7 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   ),
-                  image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&q=80'
+                  image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80'
                 },
                 { 
                   title: 'Partners', 
@@ -446,7 +446,7 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                   ),
-                  image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&q=80'
+                  image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=600&q=80'
                 }
               ].map((item, index) => (
                 <div key={index} className="bg-gradient-to-br from-gold-500/10 to-transparent border border-gold-400/20 rounded-xl overflow-hidden hover:border-gold-400/40 transition-all group">
