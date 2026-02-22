@@ -36,7 +36,9 @@ export default function Footer() {
     }
 
     try {
+      console.log('Attempting to subscribe:', trimmedEmail);
       const { data } = await api.post('/newsletter/subscribe', { email: trimmedEmail });
+      console.log('Subscription successful:', data);
       setMessage(data.message || 'Successfully subscribed to our newsletter!');
       setEmail('');
       
@@ -44,7 +46,21 @@ export default function Footer() {
       setTimeout(() => setMessage(''), 7000);
     } catch (err) {
       console.error('Subscription error:', err);
-      const errorMessage = err.response?.data?.message || 'Failed to subscribe. Please try again.';
+      console.error('Error response:', err.response);
+      
+      let errorMessage = 'Failed to subscribe. Please try again.';
+      
+      if (err.response) {
+        // Server responded with error
+        errorMessage = err.response.data?.message || errorMessage;
+      } else if (err.request) {
+        // Request made but no response
+        errorMessage = 'Unable to connect to server. Please check your internet connection.';
+      } else {
+        // Something else happened
+        errorMessage = 'An unexpected error occurred. Please try again.';
+      }
+      
       setError(errorMessage);
       
       // Keep error message visible longer on mobile
