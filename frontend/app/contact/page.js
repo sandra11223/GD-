@@ -58,17 +58,17 @@ export default function Contact() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-gold-400"></span>
               </span>
-              <span className="text-[10px] sm:text-xs font-bold text-gold-400 tracking-wider uppercase">We're Here to Help</span>
+              <span className="text-xs sm:text-sm font-bold text-gold-400 tracking-wider uppercase">We're Here to Help</span>
             </div>
             
-            <h1 className="font-black leading-none mb-3 sm:mb-4">
+            <h1 className="font-black leading-none mb-4 sm:mb-6">
                 <div className="overflow-hidden">
-                  <span className="block text-white text-lg sm:text-xl md:text-2xl lg:text-3xl animate-smoothSlideFade" style={{animationDelay: '0.1s'}}>
+                  <span className="block text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl animate-smoothSlideFade" style={{animationDelay: '0.1s'}}>
                     Contact
                   </span>
                 </div>
                 <div className="overflow-hidden">
-                  <span className="block text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl animate-smoothSlideFade" style={{
+                  <span className="block text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl animate-smoothSlideFade" style={{
                     animationDelay: '0.2s',
                     textShadow: '0 0 20px rgba(230, 200, 124, 0.6), 0 0 40px rgba(230, 200, 124, 0.4), 0 0 60px rgba(230, 200, 124, 0.2)',
                     animation: 'smoothSlideFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s, goldTextGlow 3s ease-in-out infinite'
@@ -78,7 +78,7 @@ export default function Contact() {
                 </div>
               </h1>
               
-              <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 leading-relaxed animate-smoothSlideFade" style={{animationDelay: '0.3s'}}>
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 sm:mb-6 leading-relaxed animate-smoothSlideFade max-w-2xl mx-auto" style={{animationDelay: '0.3s'}}>
                 Get in touch with our team for any inquiries or support
               </p>
           </div>

@@ -16,9 +16,19 @@ export default function Footer() {
     setMessage('');
     setError('');
 
+    // Trim whitespace
+    const trimmedEmail = email.trim();
+
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!trimmedEmail) {
+      setError('Please enter your email address.');
+      setLoading(false);
+      setTimeout(() => setError(''), 5000);
+      return;
+    }
+    
+    if (!emailRegex.test(trimmedEmail)) {
       setError('Please enter a valid email address.');
       setLoading(false);
       setTimeout(() => setError(''), 5000);
@@ -26,14 +36,19 @@ export default function Footer() {
     }
 
     try {
-      const { data } = await api.post('/newsletter/subscribe', { email });
+      const { data } = await api.post('/newsletter/subscribe', { email: trimmedEmail });
       setMessage(data.message || 'Successfully subscribed to our newsletter!');
       setEmail('');
-      setTimeout(() => setMessage(''), 5000);
+      
+      // Keep success message visible longer on mobile
+      setTimeout(() => setMessage(''), 7000);
     } catch (err) {
       console.error('Subscription error:', err);
-      setError(err.response?.data?.message || 'Failed to subscribe. Please try again.');
-      setTimeout(() => setError(''), 5000);
+      const errorMessage = err.response?.data?.message || 'Failed to subscribe. Please try again.';
+      setError(errorMessage);
+      
+      // Keep error message visible longer on mobile
+      setTimeout(() => setError(''), 7000);
     } finally {
       setLoading(false);
     }
@@ -54,8 +69,8 @@ export default function Footer() {
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 gradient-text-emerald">Stay Updated</h3>
               <p className="text-gray-300 text-base sm:text-lg">Subscribe to our newsletter for the latest updates</p>
             </div>
-            <form onSubmit={handleSubscribe} className="flex flex-col gap-2 w-full md:w-auto">
-              <div className="flex flex-col sm:flex-row gap-2 w-full">
+            <form onSubmit={handleSubscribe} className="flex flex-col gap-3 w-full md:w-auto">
+              <div className="flex flex-col sm:flex-row gap-3 w-full">
                 <input 
                   type="email" 
                   placeholder="Enter your email" 
@@ -63,22 +78,25 @@ export default function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={loading}
-                  className="px-4 sm:px-5 py-3 sm:py-4 bg-gray-900/70 border-2 border-gold-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-400/30 transition-all w-full sm:w-64 md:w-80 disabled:opacity-50 backdrop-blur-sm text-sm sm:text-base"
+                  autoComplete="email"
+                  inputMode="email"
+                  className="px-4 sm:px-5 py-3.5 sm:py-4 bg-gray-900/70 border-2 border-gold-400/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-400/30 transition-all w-full sm:w-64 md:w-80 disabled:opacity-50 backdrop-blur-sm text-base sm:text-base min-h-[50px] touch-manipulation"
+                  style={{ fontSize: '16px', WebkitAppearance: 'none' }}
                 />
                 <button 
                   type="submit" 
                   disabled={loading}
-                  className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gold-400 to-gold-400 text-gray-900 rounded-xl font-semibold hover:from-gold-400 hover:to-gold-600 active:scale-95 transition-all shadow-gold-glow hover:shadow-gold-glow-lg whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto text-sm sm:text-base touch-manipulation min-h-[48px]"
-                  style={{ WebkitTapHighlightColor: 'transparent' }}
+                  className="px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-gold-400 to-gold-500 text-gray-900 rounded-xl font-bold hover:from-gold-500 hover:to-gold-600 active:scale-95 transition-all shadow-gold-glow hover:shadow-gold-glow-lg whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto text-base sm:text-base touch-manipulation min-h-[50px]"
+                  style={{ WebkitTapHighlightColor: 'transparent', fontSize: '16px' }}
                 >
                   {loading ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </div>
               {message && (
-                <p className="text-xs sm:text-sm text-gold-400 text-center md:text-left">{message}</p>
+                <p className="text-sm sm:text-sm text-gold-400 text-center md:text-left font-medium px-2">{message}</p>
               )}
               {error && (
-                <p className="text-xs sm:text-sm text-red-400 text-center md:text-left">{error}</p>
+                <p className="text-sm sm:text-sm text-red-400 text-center md:text-left font-medium px-2">{error}</p>
               )}
             </form>
           </div>
