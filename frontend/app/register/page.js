@@ -40,12 +40,26 @@ export default function Register() {
     setLoading(true);
     try {
       const { confirmPassword, ...userData } = formData;
+      console.log('Attempting registration...');
       await register(userData);
+      console.log('Registration successful!');
     } catch (error) {
       console.error('Registration error:', error);
-      const errorMessage = error.response?.data?.message || 
-                          error.message || 
-                          'Registration failed. Please check if the backend server is running on http://localhost:5000';
+      
+      let errorMessage = 'Registration failed. Please try again.';
+      
+      if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
+        errorMessage = 'Cannot connect to server. Please check if the backend is running or check your internet connection.';
+      } else if (error.code === 'ECONNABORTED') {
+        errorMessage = 'Request timeout. The server is taking too long to respond.';
+      } else if (error.response) {
+        // Server responded with error
+        errorMessage = error.response.data?.message || error.response.data?.error || errorMessage;
+      } else if (error.request) {
+        // Request made but no response
+        errorMessage = 'No response from server. Please check if the backend is running.';
+      }
+      
       setError(errorMessage);
     } finally {
       setLoading(false);

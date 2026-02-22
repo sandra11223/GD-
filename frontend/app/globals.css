@@ -2,42 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Remove ALL focus, active, and blur effects globally */
-* {
+/* AGGRESSIVE: Remove ALL focus, active, blur, and visual feedback effects */
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
   -webkit-tap-highlight-color: transparent !important;
+  outline: 0 !important;
   outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
 }
 
+/* Remove focus ring on all states */
 *:focus,
 *:active,
 *:focus-visible,
-*:focus-within {
+*:focus-within,
+*:hover:focus,
+*:active:focus {
+  outline: 0 !important;
   outline: none !important;
   box-shadow: none !important;
   border-color: inherit !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
 }
 
+/* Specific elements */
 button,
 a,
 input,
 textarea,
 select,
-[role="button"] {
+[role="button"],
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
   -webkit-tap-highlight-color: transparent !important;
   -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  outline: 0 !important;
   outline: none !important;
 }
 
+/* All focus states */
 button:focus,
 button:active,
+button:focus-visible,
 a:focus,
 a:active,
+a:focus-visible,
 input:focus,
 input:active,
 textarea:focus,
-textarea:active {
+textarea:active,
+select:focus,
+select:active {
+  outline: 0 !important;
   outline: none !important;
   box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+/* Allow text selection in inputs */
+input,
+textarea {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
 }
 
 @layer base {
